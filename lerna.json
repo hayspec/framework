@@ -1,0 +1,14 @@
+{
+  "lerna": "2.11.0",
+  "packages": [
+    "packages/*"
+  ],
+  "version": "0.16.0",
+  "command": {
+    "publish": {
+      "npmClientArgs": [
+        "--force-publish"
+      ]
+    }
+  }
+}

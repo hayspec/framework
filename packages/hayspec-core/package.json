@@ -1,0 +1,24 @@
+{
+  "name": "@hayspec/core",
+  "version": "0.1.0",
+  "description": "Core logic for Hayspec framework.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "clean": "rm -Rf ./dist",
+    "build": "npm run clean; tsc",
+    "lint": "tslint 'src/**/*.ts?(x)'",
+    "prepublishOnly": "npm run build",
+    "test": "NODE_NO_WARNINGS=1 mocha --require ts-node/register --inspect --recursive ./src/tests/**/*.test.ts"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.1.3",
+    "@types/mocha": "^5.2.1",
+    "@types/node": "^10.3.2",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "ts-node": "^6.1.0",
+    "typescript": "^2.9.1"
+  }
+}
