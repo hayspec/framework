@@ -24,6 +24,7 @@ export interface TestResult {
 export interface TestMessage {
   type: 'TestMessage';
   name: string;
+  assertion: string;
   status: TestStatus;
 }
 

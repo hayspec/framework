@@ -10,10 +10,11 @@ export class Context<Data = {}> extends Stage<Data> {
   /**
    * 
    */
-  public assert(value: any, result: any, message?: any) {
+  public isEqual(value: any, result: any, name?: any) {
     this.messages.push({
       type: 'TestMessage',
-      name: `assert ${message}`,
+      name,
+      assertion: 'isEqual',
       status: value === result ? TestStatus.PASS : TestStatus.FAIL,
     });
   }
@@ -21,10 +22,23 @@ export class Context<Data = {}> extends Stage<Data> {
   /**
    * 
    */
-  public pass(message?: any) {
+  public isNotEqual(value: any, result: any, name?: any) {
     this.messages.push({
       type: 'TestMessage',
-      name: `assert ${message}`,
+      name,
+      assertion: 'isNotEqual',
+      status: value !== result ? TestStatus.PASS : TestStatus.FAIL,
+    });
+  }
+
+  /**
+   * 
+   */
+  public pass(name?: any) {
+    this.messages.push({
+      type: 'TestMessage',
+      name,
+      assertion: 'pass',
       status: TestStatus.PASS,
     });
   }
@@ -32,10 +46,11 @@ export class Context<Data = {}> extends Stage<Data> {
   /**
    * 
    */
-  public fail(message?: any) {
+  public fail(name?: any) {
     this.messages.push({
       type: 'TestMessage',
-      name: `assert ${message}`,
+      name,
+      assertion: 'fail',
       status: TestStatus.FAIL,
     });
   }
