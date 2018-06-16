@@ -1,5 +1,5 @@
 import { Stage } from './stage';
-import { TestMessage } from './types';
+import { TestMessage, TestStatus } from './types';
 
 /**
  * 
@@ -12,8 +12,31 @@ export class Context<Data = {}> extends Stage<Data> {
    */
   public assert(value: any, result: any, message?: any) {
     this.messages.push({
+      type: 'TestMessage',
       name: `assert ${message}`,
-      passed: value === result,
+      status: value === result ? TestStatus.PASS : TestStatus.FAIL,
+    });
+  }
+
+  /**
+   * 
+   */
+  public pass(message?: any) {
+    this.messages.push({
+      type: 'TestMessage',
+      name: `assert ${message}`,
+      status: TestStatus.PASS,
+    });
+  }
+
+  /**
+   * 
+   */
+  public fail(message?: any) {
+    this.messages.push({
+      type: 'TestMessage',
+      name: `assert ${message}`,
+      status: TestStatus.FAIL,
     });
   }
 
