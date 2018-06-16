@@ -175,6 +175,7 @@ export class Spec<Data = {}> {
     if (handler.handler instanceof Spec) {
       return await handler.handler.perform();
     } else {
+      const start = Date.now();
       const context = new Context<Data>();
       await this.performBeforeEach(context);
       await handler.handler(context, this.stage);
@@ -183,6 +184,7 @@ export class Spec<Data = {}> {
         type: 'TestResult',
         name: handler.name,
         messages: context.messages,
+        duration: Date.now() - start,
       } as TestResult;
     }
   }

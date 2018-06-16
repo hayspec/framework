@@ -2,7 +2,7 @@
  * 
  */
 export interface SpecResult {
-  type: 'SpecResult',
+  type: 'SpecResult';
   name?: string;
   results: (TestResult | SpecResult)[];
 }
@@ -11,17 +11,18 @@ export interface SpecResult {
  * 
  */
 export interface TestResult {
-  type: 'TestResult',
+  type: 'TestResult';
   name: string;
   messages: TestMessage[];
-  tests: TestResult[]
+  tests: TestResult[];
+  duration: number;
 }
 
 /**
  * 
  */
 export interface TestMessage {
-  type: 'TestMessage',
+  type: 'TestMessage';
   name: string;
   status: TestStatus;
 }
