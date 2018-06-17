@@ -218,7 +218,7 @@ export class Context<Data = {}> {
       } as AssertionNote;
     }
     const printResult = (result: AssertionNote) => {
-      // this.stage.reporter.handle(result);
+      this.stage.reporter.handle(result);
       return result;
     };
 
