@@ -3,6 +3,7 @@ import { TestMessage, TestStatus } from './types';
 import truthy from '../asserts/truthy';
 import is from '../asserts/is';
 import throws from '../asserts/throws';
+import deepEqual from '../asserts/deep-equal';
 
 /**
  * 
@@ -140,8 +141,23 @@ export class Context<Data = {}> extends Stage<Data> {
     );
   }
 
-  // deepEqual
-  // netDeepEqual
+  /**
+   * 
+   */
+  public deepEqual(value: any, expected: any, name?: any) {
+    this.messages.push(
+      this.formatMessage('deepEqual', deepEqual(value, expected), name)
+    );
+  }
+
+  /**
+   * 
+   */
+  public notDeepEqual(value: any, expected: any, name?: any) {
+    this.messages.push(
+      this.formatMessage('notDeepEqual', !deepEqual(value, expected), name)
+    );
+  }
 
   /**
    * 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-export default function (fn: () => any) {
+export default function throws (fn: () => any) {
   try {
     const res = fn();
     if (res instanceof Promise) {

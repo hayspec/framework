@@ -1,7 +1,7 @@
 /**
  * 
  */
-export default function (value) {
+export default function truthy (value) {
   return (
     value === true
     || value === 'true'

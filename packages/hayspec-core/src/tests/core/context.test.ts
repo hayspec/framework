@@ -283,3 +283,43 @@ test('method `notRegex()` asserts that string does not maches regular expression
     },
   ]);
 });
+
+test('method `deepEqual()` asserts that two objects are equal', async (t) => {
+  const context = new Context<Data>();
+  context.deepEqual({ a: 1 }, { a: 1 });
+  context.deepEqual({ a: 1 }, { a: 2 }, 'foo');
+  t.deepEqual(context.messages, [
+    {
+      type: 'TestMessage',
+      name: null,
+      assertion: 'deepEqual',
+      status: 1,
+    },
+    {
+      type: 'TestMessage',
+      name: 'foo',
+      assertion: 'deepEqual',
+      status: 2,
+    },
+  ]);
+});
+
+test('method `notDeepEqual()` asserts that two objects are equal', async (t) => {
+  const context = new Context<Data>();
+  context.notDeepEqual({ a: 1 }, { a: 2 });
+  context.notDeepEqual({ a: 1 }, { a: 1 }, 'foo');
+  t.deepEqual(context.messages, [
+    {
+      type: 'TestMessage',
+      name: null,
+      assertion: 'notDeepEqual',
+      status: 1,
+    },
+    {
+      type: 'TestMessage',
+      name: 'foo',
+      assertion: 'notDeepEqual',
+      status: 2,
+    },
+  ]);
+});
