@@ -3,7 +3,7 @@
  */
 export interface SpecResult {
   type: 'SpecResult';
-  name?: string;
+  name: string;
   results: (TestResult | SpecResult)[];
 }
 

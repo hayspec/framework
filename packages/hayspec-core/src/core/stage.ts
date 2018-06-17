@@ -2,7 +2,7 @@
  * 
  */
 export class Stage<Data = {}> {
-  public data: Data = {} as any;
+  protected data: Data = {} as any;
 
   /**
    * 

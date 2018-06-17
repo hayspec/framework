@@ -75,14 +75,14 @@ export class Spec<Data = {}> {
    * 
    */
   public spec (name: string, spec: Spec<Data>) {
-    const sub = spec.clone();
+    const handler = spec.clone();
 
-    this.beforeHandlers.forEach((h) => sub.before(h));
-    this.beforeEachHandlers.forEach((h) => sub.beforeEach(h));
-    this.afterHandlers.forEach((h) => sub.after(h));
-    this.afterEachHandlers.forEach((h) => sub.afterEach(h));
+    this.beforeHandlers.forEach((h) => handler.before(h));
+    this.beforeEachHandlers.forEach((h) => handler.beforeEach(h));
+    this.afterHandlers.forEach((h) => handler.after(h));
+    this.afterEachHandlers.forEach((h) => handler.afterEach(h));
 
-    this.testRecipes.push({ name, handler: sub });
+    this.testRecipes.push({ name, handler });
 
     return this;
   }
@@ -150,6 +150,7 @@ export class Spec<Data = {}> {
 
     return {
       type: 'SpecResult',
+      name: null,
       results
     } as SpecResult;
   }
