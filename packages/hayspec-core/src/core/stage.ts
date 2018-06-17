@@ -1,8 +1,18 @@
+import { Reporter } from "./reporter";
+
 /**
  * 
  */
 export class Stage<Data = {}> {
   protected data: Data = {} as any;
+  public reporter: Reporter;
+
+  /**
+   * 
+   */
+  public constructor (reporter?: Reporter) {
+    this.reporter = reporter || new Reporter();
+  }
 
   /**
    * 

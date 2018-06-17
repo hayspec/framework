@@ -1,5 +1,5 @@
 import test from 'ava';
-import { Context } from '../..';
+import { Context, Stage } from '../..';
 
 interface Data {
   id: number;
@@ -16,310 +16,349 @@ test('methods `set()` and `get()` manages values', async (t) => {
   t.is(name, 'foo');
 });
 
+test('methods `get()` inherits values from stage', async (t) => {
+  const stage = new Stage<Data>();
+  const context = new Context<Data>(stage);
+  stage.set('id', 100);
+  context.set('name', 'foo');
+  const id = context.get('id'); // typescript should show `integer` type
+  const name = context.get('name'); // typescript should show `string` type
+  t.is(id, 100);
+  t.is(name, 'foo');
+});
+
 test('method `pass()` passes the test', async (t) => {
   const context = new Context<Data>();
-  context.pass();
-  context.pass('foo');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.pass(),
+    context.pass('foo'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'pass',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'pass',
-      status: 1,
+      success: true,
     },
   ]);
 });
 
 test('method `fail()` fails the test', async (t) => {
   const context = new Context<Data>();
-  context.fail();
-  context.fail('foo');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.fail(),
+    context.fail('foo'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'fail',
-      status: 2,
+      success: false,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'fail',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `truthy()` asserts that value is truthy', async (t) => {
   const context = new Context<Data>();
-  context.truthy(true);
-  context.truthy(false, 'foo');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.truthy(true),
+    context.truthy(false, 'foo'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'truthy',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'truthy',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `falsy()` asserts that value is falsy', async (t) => {
   const context = new Context<Data>();
-  context.falsy('false');
-  context.falsy('true', 'foo');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.falsy('false'),
+    context.falsy('true', 'foo'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'falsy',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'falsy',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `true()` asserts that value is true', async (t) => {
   const context = new Context<Data>();
-  context.true(true);
-  context.true(false, 'foo');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.true(true),
+    context.true(false, 'foo'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'true',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'true',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `false()` asserts that value is false', async (t) => {
   const context = new Context<Data>();
-  context.false(false);
-  context.false(true, 'foo');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.false(false),
+    context.false(true, 'foo'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'false',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'false',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `is()` asserts that two values are equal', async (t) => {
   const context = new Context<Data>();
-  context.is('foo', 'foo');
-  context.is(100, 200, 'foo');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.is('foo', 'foo'),
+    context.is(100, 200, 'foo'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'is',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'is',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `not()` asserts that two values are not equal', async (t) => {
   const context = new Context<Data>();
-  context.not('foo', 'bar');
-  context.not(100, 100, 'foo');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.not('foo', 'bar'),
+    context.not(100, 100, 'foo'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'not',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'not',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `throws()` asserts that function throws an error', async (t) => {
   const context = new Context<Data>();
-  context.throws(() => { throw new Error(); });
-  await context.throws(() => Promise.reject(), 'foo');
-  context.throws(() => { return; }, 'foo');
-  await context.throws(() => Promise.resolve());
-  t.deepEqual(context.messages, [
+  const results = [
+    context.throws(() => { throw new Error(); }),
+    await context.throws(() => Promise.reject(), 'foo'),
+    context.throws(() => { return; }, 'foo'),
+    await context.throws(() => Promise.resolve()),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'throws',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'throws',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'throws',
-      status: 2,
+      success: false,
     },
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'throws',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `notThrows()` asserts that function does not throw an error', async (t) => {
   const context = new Context<Data>();
-  context.notThrows(() => { return; });
-  await context.notThrows(() => Promise.resolve(), 'foo');
-  context.notThrows(() => { throw new Error(); }, 'foo');
-  await context.notThrows(() => Promise.reject());
-  t.deepEqual(context.messages, [
+  const results = [
+    context.notThrows(() => { return; }),
+    await context.notThrows(() => Promise.resolve(), 'foo'),
+    context.notThrows(() => { throw new Error(); }, 'foo'),
+    await context.notThrows(() => Promise.reject()),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'notThrows',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'notThrows',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'notThrows',
-      status: 2,
+      success: false,
     },
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'notThrows',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `regex()` asserts that string maches regular expression', async (t) => {
   const context = new Context<Data>();
-  context.regex(/bar/, 'foo bar baz');
-  context.regex(/zed/, 'foo bar baz', 'zed');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.regex(/bar/, 'foo bar baz'),
+    context.regex(/zed/, 'foo bar baz', 'zed'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'regex',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'zed',
+      type: 'AssertionNote',
+      message: 'zed',
       assertion: 'regex',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `notRegex()` asserts that string does not maches regular expression', async (t) => {
   const context = new Context<Data>();
-  context.notRegex(/bar/, 'foo bar baz');
-  context.notRegex(/zed/, 'foo bar baz', 'zed');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.notRegex(/bar/, 'foo bar baz'),
+    context.notRegex(/zed/, 'foo bar baz', 'zed'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'notRegex',
-      status: 2,
+      success: false,
     },
     {
-      type: 'TestMessage',
-      name: 'zed',
+      type: 'AssertionNote',
+      message: 'zed',
       assertion: 'notRegex',
-      status: 1,
+      success: true,
     },
   ]);
 });
 
 test('method `deepEqual()` asserts that two objects are equal', async (t) => {
   const context = new Context<Data>();
-  context.deepEqual({ a: 1 }, { a: 1 });
-  context.deepEqual({ a: 1 }, { a: 2 }, 'foo');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.deepEqual({ a: 1 }, { a: 1 }),
+    context.deepEqual({ a: 1 }, { a: 2 }, 'foo'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'deepEqual',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'deepEqual',
-      status: 2,
+      success: false,
     },
   ]);
 });
 
 test('method `notDeepEqual()` asserts that two objects are equal', async (t) => {
   const context = new Context<Data>();
-  context.notDeepEqual({ a: 1 }, { a: 2 });
-  context.notDeepEqual({ a: 1 }, { a: 1 }, 'foo');
-  t.deepEqual(context.messages, [
+  const results = [
+    context.notDeepEqual({ a: 1 }, { a: 2 }),
+    context.notDeepEqual({ a: 1 }, { a: 1 }, 'foo'),
+  ];
+  t.deepEqual(results, [
     {
-      type: 'TestMessage',
-      name: null,
+      type: 'AssertionNote',
+      message: null,
       assertion: 'notDeepEqual',
-      status: 1,
+      success: true,
     },
     {
-      type: 'TestMessage',
-      name: 'foo',
+      type: 'AssertionNote',
+      message: 'foo',
       assertion: 'notDeepEqual',
-      status: 2,
+      success: false,
     },
   ]);
 });

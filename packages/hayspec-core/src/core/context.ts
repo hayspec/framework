@@ -1,5 +1,5 @@
 import { Stage } from './stage';
-import { TestMessage, TestStatus } from './types';
+import { AssertionNote } from './types';
 import truthy from '../asserts/truthy';
 import is from '../asserts/is';
 import throws from '../asserts/throws';
@@ -8,167 +8,229 @@ import deepEqual from '../asserts/deep-equal';
 /**
  * 
  */
-export class Context<Data = {}> extends Stage<Data> {
-  readonly messages: TestMessage[] = [];
+interface AssertionRecipe {
+  assertion: string;
+  handler: () => (boolean | Promise<boolean>);
+  message?: string;
+}
+
+/**
+ * 
+ */
+export class Context<Data = {}> {
+  protected data: Data = {} as any;
+  readonly stage: Stage<Data>;
 
   /**
    * 
    */
-  public pass(name?: string) {
-    this.messages.push(
-      this.formatMessage('pass', true, name)
-    );
+  public constructor(stage?: Stage<Data>) {
+    this.stage = stage || new Stage<Data>();
+  }
+  
+  /**
+   * 
+   */
+  public get<Key extends keyof Data>(k: Key) {
+    return this.data[k] || this.stage.get(k);
   }
 
   /**
    * 
    */
-  public fail(name?: any) {
-    this.messages.push(
-      this.formatMessage('fail', false, name)
-    );
+  public set<Key extends string, Value>(k: Key, v: Value) {
+    (this.data as any)[k] = v;
   }
 
   /**
    * 
    */
-  public truthy(value: any, name?: any) {
-    this.messages.push(
-      this.formatMessage('truthy', truthy(value), name)
-    );
+  public pass(message?: string) {
+    return this.assert({
+      assertion: 'pass',
+      handler: () => true,
+      message,
+    });
   }
 
   /**
    * 
    */
-  public falsy(value: any, name?: any) {
-    this.messages.push(
-      this.formatMessage('falsy', !truthy(value), name)
-    );
+  public fail(message?: any) {
+    return this.assert({
+      assertion: 'fail',
+      handler: () => false,
+      message,
+    });
   }
 
   /**
    * 
    */
-  public true(value: any, name?: any) {
-    this.messages.push(
-      this.formatMessage('true', !!value, name)
-    );
+  public truthy(value: any, message?: any) {
+    return this.assert({
+      assertion: 'truthy',
+      handler: () => truthy(value),
+      message,
+    });
   }
 
   /**
    * 
    */
-  public false(value: any, name?: any) {
-    this.messages.push(
-      this.formatMessage('false', !value, name)
-    );
+  public falsy(value: any, message?: any) {
+    return this.assert({
+      assertion: 'falsy',
+      handler: () => !truthy(value),
+      message,
+    });
   }
 
   /**
    * 
    */
-  public is(value: any, expected: any, name?: any) {
-    this.messages.push(
-      this.formatMessage('is', is(value, expected), name)
-    );
+  public true(value: any, message?: any) {
+    return this.assert({
+      assertion: 'true',
+      handler: () => !!value,
+      message,
+    });
   }
 
   /**
    * 
    */
-  public not(value: any, expected: any, name?: any) {
-    this.messages.push(
-      this.formatMessage('not', !is(value, expected), name)
-    );
+  public false(value: any, message?: any) {
+    return this.assert({
+      assertion: 'false',
+      handler: () => !value,
+      message,
+    });
   }
 
   /**
    * 
    */
-  public throws(fn: () => any, name?: any) {
-    const res = throws(fn);
+  public is(value: any, expected: any, message?: any) {
+    return this.assert({
+      assertion: 'is',
+      handler: () => is(value, expected),
+      message,
+    });
+  }
 
-    if (res instanceof Promise) {
-      return res.then((res) => {
-        this.messages.push(
-          this.formatMessage('throws', res, name)
-        );    
+  /**
+   * 
+   */
+  public not(value: any, expected: any, message?: any) {
+    return this.assert({
+      assertion: 'not',
+      handler: () => !is(value, expected),
+      message,
+    });
+  }
+
+  /**
+   * 
+   */
+  public throws(fn: () => any, message?: any) {
+    return this.assert({
+      assertion: 'throws',
+      handler: () => throws(fn),
+      message,
+    });
+  }
+
+  /**
+   * 
+   */
+  public notThrows(fn: () => any, message?: any) {
+    return this.assert({
+      assertion: 'notThrows',
+      handler: () => {
+        const res = throws(fn);
+        if (res instanceof Promise) {
+          return res.then((res) => !res);
+        } else {
+          return !res;
+        }
+      },
+      message,
+    });
+  }
+
+  /**
+   * 
+   */
+  public regex(exp: RegExp, value: string, message?: any) {
+    return this.assert({
+      assertion: 'regex',
+      handler: () => exp.test(value),
+      message,
+    });
+  }
+
+  /**
+   * 
+   */
+  public notRegex(exp: RegExp, value: string, message?: any) {
+    return this.assert({
+      assertion: 'notRegex',
+      handler: () => !exp.test(value),
+      message,
+    });
+  }
+
+  /**
+   * 
+   */
+  public deepEqual(value: any, expected: any, message?: any) {
+    return this.assert({
+      assertion: 'deepEqual',
+      handler: () => deepEqual(value, expected),
+      message,
+    });
+  }
+
+  /**
+   * 
+   */
+  public notDeepEqual(value: any, expected: any, message?: any) {
+    return this.assert({
+      assertion: 'notDeepEqual',
+      handler: () => !deepEqual(value, expected),
+      message,
+    });
+  }
+
+  /**
+   * 
+   */
+  protected assert(recipe: AssertionRecipe) {
+    const success = recipe.handler();
+
+    const buildResult = (success: boolean) => {
+      return {
+        type: 'AssertionNote',
+        message: recipe.message || null,
+        assertion: recipe.assertion || null,
+        success: !!success,
+      } as AssertionNote;
+    }
+    const printResult = (result: AssertionNote) => {
+      // this.stage.reporter.handle(result);
+      return result;
+    };
+
+    if (success instanceof Promise) {
+      return success.then((success) => {
+        const result = buildResult(success);
+        return printResult(result);
       });
+    } else {
+      const result = buildResult(success);
+      return printResult(result);
     }
-    else {
-      this.messages.push(
-        this.formatMessage('throws', res, name)
-      );
-    }
-  }
-
-  /**
-   * 
-   */
-  public notThrows(fn: () => any, name?: any) {
-    const res = throws(fn);
-
-    if (res instanceof Promise) {
-      return res.then((res) => {
-        this.messages.push(
-          this.formatMessage('notThrows', !res, name)
-        );    
-      });
-    }
-    else {
-      this.messages.push(
-        this.formatMessage('notThrows', !res, name)
-      );
-    }
-  }
-
-  /**
-   * 
-   */
-  public regex(exp: RegExp, value: string, name?: any) {
-    this.messages.push(
-      this.formatMessage('regex', exp.test(value), name)
-    );
-  }
-
-  /**
-   * 
-   */
-  public notRegex(exp: RegExp, value: string, name?: any) {
-    this.messages.push(
-      this.formatMessage('notRegex', !exp.test(value), name)
-    );
-  }
-
-  /**
-   * 
-   */
-  public deepEqual(value: any, expected: any, name?: any) {
-    this.messages.push(
-      this.formatMessage('deepEqual', deepEqual(value, expected), name)
-    );
-  }
-
-  /**
-   * 
-   */
-  public notDeepEqual(value: any, expected: any, name?: any) {
-    this.messages.push(
-      this.formatMessage('notDeepEqual', !deepEqual(value, expected), name)
-    );
-  }
-
-  /**
-   * 
-   */
-  protected formatMessage(assertion: string, success: boolean, name: string) {
-    return {
-      type: 'TestMessage',
-      name: name || null,
-      assertion,
-      status: success ? TestStatus.PASS : TestStatus.FAIL,
-    } as TestMessage;
   }
 
 }

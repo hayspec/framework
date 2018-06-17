@@ -1,6 +1,6 @@
 import { Stage } from './stage';
 import { Context } from './context';
-import { SpecResult, TestResult } from './types';
+import { Reporter } from './reporter';
 
 /**
  * 
@@ -15,8 +15,16 @@ type ContextHandler<Data> = (context: Context<Data>, stage: Stage<Data>) => (voi
 /**
  * 
  */
+interface SpecRecipe<Data> {
+  stage?: Stage<Data>;
+  reporter?: Reporter;
+}
+
+/**
+ * 
+ */
 interface TestRecipe<Data> {
-  name: string;
+  message: string;
   handler: ContextHandler<Data> | Spec<Data>;
 }
 
@@ -35,14 +43,14 @@ export class Spec<Data = {}> {
   /**
    * 
    */
-  public constructor (stage?: Stage<Data>) {
-    this.stage = stage || new Stage();
+  public constructor(stage?: Stage<Data>) {
+    this.stage = stage ? stage : new Stage<Data>();
   }
 
   /**
    * 
    */
-  public before (handler: StageHandler<Data>) {
+  public before(handler: StageHandler<Data>) {
     this.beforeHandlers.push(handler);
     return this;
   }
@@ -50,7 +58,7 @@ export class Spec<Data = {}> {
   /**
    * 
    */
-  public beforeEach (handler: ContextHandler<Data>) {
+  public beforeEach(handler: ContextHandler<Data>) {
     this.beforeEachHandlers.push(handler);
     return this;
   }
@@ -58,7 +66,7 @@ export class Spec<Data = {}> {
   /**
    * 
    */
-  public after (handler: StageHandler<Data>) {
+  public after(handler: StageHandler<Data>) {
     this.afterHandlers.push(handler);
     return this;
   }
@@ -66,7 +74,7 @@ export class Spec<Data = {}> {
   /**
    * 
    */
-  public afterEach (handler: ContextHandler<Data>) {
+  public afterEach(handler: ContextHandler<Data>) {
     this.afterEachHandlers.push(handler);
     return this;
   }
@@ -74,7 +82,7 @@ export class Spec<Data = {}> {
   /**
    * 
    */
-  public spec (name: string, spec: Spec<Data>) {
+  public spec(message: string, spec: Spec<Data>) {
     const handler = spec.clone();
 
     this.beforeHandlers.forEach((h) => handler.before(h));
@@ -82,7 +90,7 @@ export class Spec<Data = {}> {
     this.afterHandlers.forEach((h) => handler.after(h));
     this.afterEachHandlers.forEach((h) => handler.afterEach(h));
 
-    this.testRecipes.push({ name, handler });
+    this.testRecipes.push({ message, handler });
 
     return this;
   }
@@ -90,9 +98,9 @@ export class Spec<Data = {}> {
   /**
    * 
    */
-  public test (name: string, handler: ContextHandler<Data>) {
+  public test(message: string, handler: ContextHandler<Data>) {
     if (!this.onlyEnabled) {
-      this.testRecipes.push({ name, handler });
+      this.testRecipes.push({ message, handler });
     }
     return this;
   }
@@ -100,24 +108,24 @@ export class Spec<Data = {}> {
   /**
    * 
    */
-  public skip (name: string, handler: ContextHandler<Data>) {
-    this.testRecipes.push({ name, handler });
+  public skip(message: string, handler: ContextHandler<Data>) {
+    this.testRecipes.push({ message, handler: null });
     return this;
   }
 
   /**
    * 
    */
-  public only (name: string, handler: ContextHandler<Data>) {
+  public only(message: string, handler: ContextHandler<Data>) {
     this.onlyEnabled = true;
-    this.testRecipes.push({ name, handler });
+    this.testRecipes.push({ message, handler });
     return this;
   }
 
   /**
    *
    */
-  public clone () {
+  public clone() {
     const spec = new Spec(this.stage);
   
     this.beforeHandlers.forEach((h) => spec.before(h));
@@ -127,9 +135,9 @@ export class Spec<Data = {}> {
 
     this.testRecipes.forEach((r) => {
       if (r.handler instanceof Spec) {
-        spec.spec(r.name, r.handler)
+        spec.spec(r.message, r.handler)
       } else {
-        spec.test(r.name, r.handler)
+        spec.test(r.message, r.handler)
       }
     });
 
@@ -139,90 +147,99 @@ export class Spec<Data = {}> {
   /**
    * 
    */
-  public async perform () {
-    const results: (TestResult | SpecResult)[] = [];
-
+  public async perform() {
     await this.performBefore();
-    results.push(
-      ...await this.performBatch(this.testRecipes)
-    );
+
+    for (const recipe of this.testRecipes) {
+      if (recipe.handler instanceof Spec) {
+        await this.performSpec(recipe);
+      } else {
+        await this.performTest(recipe);
+      }
+    }
+
     await this.performAfter();
-
-    return {
-      type: 'SpecResult',
-      name: null,
-      results
-    } as SpecResult;
   }
 
   /**
    * 
    */
-  protected async performBatch (handlers: TestRecipe<Data>[]) {
-    const results: (TestResult | SpecResult)[] = [];
+  protected async performSpec(recipe: TestRecipe<Data>) {
+    const start = Date.now();
 
-    for (const handler of handlers) {
-      const test = await this.performOne(handler);
-      results.push(test);
-    }
+    this.stage.reporter.handle({
+      type: 'SpecStartNote',
+      message: recipe.message,
+    });
 
-    return results;
+    const spec = recipe.handler as Spec<Data>;
+    await spec.perform();
+
+    this.stage.reporter.handle({
+      type: 'SpecEndNote',
+      duration: Date.now() - start,
+    });
   }
 
   /**
    * 
    */
-  protected async performOne (handler: TestRecipe<Data>) {
-    if (handler.handler instanceof Spec) {
-      return await handler.handler.perform();
-    } else {
-      const start = Date.now();
-      const context = new Context<Data>();
+  protected async performTest(recipe: TestRecipe<Data>) {
+    const start = Date.now();
+
+    this.stage.reporter.handle({
+      type: 'TestStartNote',
+      message: recipe.message,
+      perform: !!recipe.handler,
+    });
+
+    if (recipe.handler) {
+      const context = new Context<Data>(this.stage);
+      const handler = recipe.handler as ContextHandler<Data>;
       await this.performBeforeEach(context);
-      await handler.handler(context, this.stage);
+      await handler(context, this.stage);
       await this.performAfterEach(context);
-      return {
-        type: 'TestResult',
-        name: handler.name,
-        messages: context.messages,
-        duration: Date.now() - start,
-      } as TestResult;
+    }
+
+    this.stage.reporter.handle({
+      type: 'TestEndNote',
+      duration: Date.now() - start,
+    });
+  }
+
+  /**
+   * 
+   */
+  protected async performBefore() {
+    for (const handler of this.beforeHandlers) {
+      await handler(this.stage);
     }
   }
 
   /**
    * 
    */
-  protected async performBefore () {
-    for (const before of this.beforeHandlers) {
-      await before(this.stage);
+  protected async performAfter() {
+    for (const handler of this.afterHandlers) {
+      await handler(this.stage);
     }
   }
 
   /**
    * 
    */
-  protected async performAfter () {
-    for (const after of this.afterHandlers) {
-      await after(this.stage);
+  protected async performBeforeEach(context: Context<Data>) {
+    for (const handler of this.beforeEachHandlers) {
+      await handler(context, this.stage);
     }
   }
 
   /**
    * 
    */
-  protected async performBeforeEach (context: Context<Data>) {
-    for (const beforeEach of this.beforeEachHandlers) {
-      await beforeEach(context, this.stage);
-    }
-  }
-
-  /**
-   * 
-   */
-  protected async performAfterEach (context: Context<Data>) {
-    for (const afterEach of this.afterEachHandlers) {
-      await afterEach(context, this.stage);
+  protected async performAfterEach(context: Context<Data>) {
+    for (const handler of this.afterEachHandlers) {
+      await handler(context, this.stage);
     }
   }
 

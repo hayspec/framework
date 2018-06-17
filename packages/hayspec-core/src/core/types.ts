@@ -1,39 +1,42 @@
 /**
  * 
  */
-export interface SpecResult {
-  type: 'SpecResult';
-  name: string;
-  results: (TestResult | SpecResult)[];
+export interface SpecStartNote {
+  type: 'SpecStartNote';
+  message: string;
 }
 
 /**
  * 
  */
-export interface TestResult {
-  type: 'TestResult';
-  name: string;
-  messages: TestMessage[];
-  tests: TestResult[];
+export interface SpecEndNote {
+  type: 'SpecEndNote';
   duration: number;
 }
 
 /**
  * 
  */
-export interface TestMessage {
-  type: 'TestMessage';
-  name: string;
-  assertion: string;
-  status: TestStatus;
+export interface TestStartNote {
+  type: 'TestStartNote';
+  message: string;
+  perform: boolean;
 }
 
 /**
  * 
  */
-export enum TestStatus {
-  SKIP = 0,
-  PASS = 1,
-  FAIL = 2,
+export interface TestEndNote {
+  type: 'TestEndNote';
+  duration: number;
 }
 
+/**
+ * 
+ */
+export interface AssertionNote {
+  type: 'AssertionNote';
+  message: string;
+  assertion: string;
+  success: boolean;
+}

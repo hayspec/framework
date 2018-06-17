@@ -6,7 +6,7 @@ interface Data {
   name: string;
 }
 
-test('sets and gets values', async (t) => {
+test('methods `set()` and `get()` manages values', async (t) => {
   const stage = new Stage<Data>();
   stage.set('id', 100);
   stage.set('name', 'foo');
