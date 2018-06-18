@@ -1,5 +1,8 @@
 import test from 'ava';
 import { Context, Stage } from '../..';
+import { Reporter } from '../../core/reporter';
+
+const reporter = new Reporter();
 
 interface Data {
   id: number;
@@ -7,7 +10,8 @@ interface Data {
 }
 
 test('methods `set()` and `get()` manages values', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   context.set('id', 100);
   context.set('name', 'foo');
   const id = context.get('id'); // typescript should show `integer` type
@@ -17,7 +21,7 @@ test('methods `set()` and `get()` manages values', async (t) => {
 });
 
 test('methods `get()` inherits values from stage', async (t) => {
-  const stage = new Stage<Data>();
+  const stage = new Stage<Data>(reporter);
   const context = new Context<Data>(stage);
   stage.set('id', 100);
   context.set('name', 'foo');
@@ -28,7 +32,8 @@ test('methods `get()` inherits values from stage', async (t) => {
 });
 
 test('method `pass()` passes the test', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.pass(),
     context.pass('foo'),
@@ -50,7 +55,8 @@ test('method `pass()` passes the test', async (t) => {
 });
 
 test('method `fail()` fails the test', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.fail(),
     context.fail('foo'),
@@ -72,7 +78,8 @@ test('method `fail()` fails the test', async (t) => {
 });
 
 test('method `truthy()` asserts that value is truthy', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.truthy(true),
     context.truthy(false, 'foo'),
@@ -94,7 +101,8 @@ test('method `truthy()` asserts that value is truthy', async (t) => {
 });
 
 test('method `falsy()` asserts that value is falsy', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.falsy('false'),
     context.falsy('true', 'foo'),
@@ -116,7 +124,8 @@ test('method `falsy()` asserts that value is falsy', async (t) => {
 });
 
 test('method `true()` asserts that value is true', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.true(true),
     context.true(false, 'foo'),
@@ -138,7 +147,8 @@ test('method `true()` asserts that value is true', async (t) => {
 });
 
 test('method `false()` asserts that value is false', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.false(false),
     context.false(true, 'foo'),
@@ -160,7 +170,8 @@ test('method `false()` asserts that value is false', async (t) => {
 });
 
 test('method `is()` asserts that two values are equal', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.is('foo', 'foo'),
     context.is(100, 200, 'foo'),
@@ -182,7 +193,8 @@ test('method `is()` asserts that two values are equal', async (t) => {
 });
 
 test('method `not()` asserts that two values are not equal', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.not('foo', 'bar'),
     context.not(100, 100, 'foo'),
@@ -204,7 +216,8 @@ test('method `not()` asserts that two values are not equal', async (t) => {
 });
 
 test('method `throws()` asserts that function throws an error', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.throws(() => { throw new Error(); }),
     await context.throws(() => Promise.reject(), 'foo'),
@@ -240,7 +253,8 @@ test('method `throws()` asserts that function throws an error', async (t) => {
 });
 
 test('method `notThrows()` asserts that function does not throw an error', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.notThrows(() => { return; }),
     await context.notThrows(() => Promise.resolve(), 'foo'),
@@ -276,7 +290,8 @@ test('method `notThrows()` asserts that function does not throw an error', async
 });
 
 test('method `regex()` asserts that string maches regular expression', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.regex(/bar/, 'foo bar baz'),
     context.regex(/zed/, 'foo bar baz', 'zed'),
@@ -298,7 +313,8 @@ test('method `regex()` asserts that string maches regular expression', async (t)
 });
 
 test('method `notRegex()` asserts that string does not maches regular expression', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.notRegex(/bar/, 'foo bar baz'),
     context.notRegex(/zed/, 'foo bar baz', 'zed'),
@@ -320,7 +336,8 @@ test('method `notRegex()` asserts that string does not maches regular expression
 });
 
 test('method `deepEqual()` asserts that two objects are equal', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.deepEqual({ a: 1 }, { a: 1 }),
     context.deepEqual({ a: 1 }, { a: 2 }, 'foo'),
@@ -342,7 +359,8 @@ test('method `deepEqual()` asserts that two objects are equal', async (t) => {
 });
 
 test('method `notDeepEqual()` asserts that two objects are equal', async (t) => {
-  const context = new Context<Data>();
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
   const results = [
     context.notDeepEqual({ a: 1 }, { a: 2 }),
     context.notDeepEqual({ a: 1 }, { a: 1 }, 'foo'),

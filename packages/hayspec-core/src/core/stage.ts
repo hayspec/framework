@@ -10,8 +10,8 @@ export class Stage<Data = {}> {
   /**
    * 
    */
-  public constructor (reporter?: Reporter) {
-    this.reporter = reporter || new Reporter();
+  public constructor (reporter: Reporter) {
+    this.reporter = reporter;
   }
 
   /**

@@ -114,9 +114,13 @@ export class DefaultReporter extends Reporter {
     this.assertionResults = [];
 
     const color = this.getDurationColor(note.duration);
-    this.printer.end(
-      this.getColoredText(color, `${note.duration}ms`)
-    );
+    if (color) {
+      this.printer.write(
+        this.getColoredText(color, `${note.duration}ms`)
+      );
+    }
+
+    this.printer.end();
   }
 
   /**
@@ -148,12 +152,12 @@ export class DefaultReporter extends Reporter {
    * 
    */
   protected getDurationColor(duration: number) {
-    if (duration > 100) {
+    if (duration > 200) {
       return 'redBright';
-    } else if (duration > 50) {
+    } else if (duration > 100) {
       return 'yellowBright';
     } else {
-      return 'greenBright'
+      return null;
     }
   }
 

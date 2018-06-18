@@ -1,5 +1,6 @@
 import { Stage } from './stage';
 import { Context } from './context';
+import { Reporter } from './reporter';
 
 /**
  * 
@@ -30,7 +31,7 @@ export class Spec<Data = {}> {
   protected afterEachHandlers: ContextHandler<Data>[] = [];
   protected performRecipes: PerformRecipes<Data>[] = [];
   protected onlyEnabled: boolean = false;
-  protected stage_: Stage<Data> = new Stage<Data>();
+  protected stage_: Stage<Data> = this.createStage();
   public parent: Spec<Data> = null;
 
   /**
@@ -207,7 +208,7 @@ export class Spec<Data = {}> {
     });
 
     if (recipe.handler) {
-      const context = new Context<Data>(this.stage);
+      const context = this.createContext();
       await this.performBeforeEach(context);
       await recipe.handler(context, this.stage);
       await this.performAfterEach(context);
@@ -253,6 +254,21 @@ export class Spec<Data = {}> {
     for (const handler of this.afterEachHandlers) {
       await handler(context, this.stage);
     }
+  }
+
+  /**
+   * 
+   */
+  protected createStage() {
+    const reporter = new Reporter();
+    return new Stage<Data>(reporter);
+  }
+
+  /**
+   * 
+   */
+  protected createContext() {
+    return new Context<Data>(this.stage);
   }
 
 };

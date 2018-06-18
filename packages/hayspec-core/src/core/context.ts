@@ -24,8 +24,8 @@ export class Context<Data = {}> {
   /**
    * 
    */
-  public constructor(stage?: Stage<Data>) {
-    this.stage = stage || new Stage<Data>();
+  public constructor(stage: Stage<Data>) {
+    this.stage = stage;
   }
 
   /**
