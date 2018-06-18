@@ -4,6 +4,14 @@ import * as glob from 'fast-glob';
 /**
  *
  */
+export interface RunnerResult {
+  file: string;
+  spec: Spec;
+}
+
+/**
+ *
+ */
 export interface RunnerOptions {
   cwd?: string;
   deep?: boolean;
@@ -15,7 +23,7 @@ export interface RunnerOptions {
  */
 export class Runner {
   protected options: RunnerOptions;
-  public specs: Spec[] = [];
+  public results: RunnerResult[] = [];
 
   /**
    * 
@@ -48,12 +56,12 @@ export class Runner {
    * 
    */
   public async loadSpec(file: string) {
-    const def = require(file);
+    const spec = require(file);
 
-    if (def instanceof Spec) {
-      this.specs.push(def);
-    } else if (def.default instanceof Spec) {
-      this.specs.push(def.default);
+    if (spec instanceof Spec) {
+      this.results.push({ file, spec });
+    } else if (spec.default instanceof Spec) {
+      this.results.push({ file, spec: spec.default });
     }
   }
 
