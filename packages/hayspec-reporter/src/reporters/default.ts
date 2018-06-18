@@ -5,7 +5,7 @@ import { Printer } from '../lib/printer';
 /**
  * 
  */
-export class BddReporter extends Reporter {
+export class DefaultReporter extends Reporter {
   protected printer: Printer;
   protected assertionResults: boolean[] = [];
   protected passedCount: number = 0;

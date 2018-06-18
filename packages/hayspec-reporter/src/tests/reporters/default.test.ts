@@ -7,9 +7,9 @@
 
 import * as sleep from 'sleep-promise';
 import { Spec } from '@hayspec/core';
-import { BddReporter } from '../../reporters/bdd';
+import { DefaultReporter } from '../../reporters/default';
 
-const reporter = new BddReporter();
+const reporter = new DefaultReporter();
 
 const colors = new Spec();
 colors.test('correctly checks all the supported interfaces', async (context, stage) => {
