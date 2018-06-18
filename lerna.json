@@ -3,12 +3,5 @@
   "packages": [
     "packages/*"
   ],
-  "version": "0.16.0",
-  "command": {
-    "publish": {
-      "npmClientArgs": [
-        "--force-publish"
-      ]
-    }
-  }
+  "version": "0.0.1"
 }
