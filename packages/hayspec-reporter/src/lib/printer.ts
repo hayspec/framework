@@ -3,15 +3,12 @@
  */
 export class Printer {
 
-  public write(str?: string) {
-    if (str) {
-      process.stdout.write(str);
-    }
+  public write(...input: any[]) {
+    process.stdout.write(input.join(''));
   }
 
-  public end(str?: string) {
-    this.write(str);
-    this.write('\n\r');
+  public end(...input: any[]) {
+    this.write(...input, '\n\r');
   }
 
 }

@@ -46,27 +46,27 @@ export class BddReporter extends Reporter {
     const messages = [];
     if (this.passedCount) {
       messages.push(
-        Array(3).join(' '),
-        chalk.greenBright(`${this.passedCount}`),
+        this.getIndentSpaces(1),
+        this.getColoredText('greenBright', this.passedCount),
         ' passing',
       );
     }
     if (this.skippedCount) {
       messages.push(
-        Array(3).join(' '),
-        chalk.yellowBright(`${this.skippedCount}`),
+        this.getIndentSpaces(1),
+        this.getColoredText('yellowBright', this.skippedCount),
         ' skipped',
       );
     }
     if (this.failedCount) {
       messages.push(
-        Array(3).join(' '),
-        chalk.redBright(`${this.failedCount}`),
+        this.getIndentSpaces(1),
+        this.getColoredText('redBright', this.failedCount),
         ' failed',
       );
     }
     if (messages.length) {
-      this.printer.end(messages.join(''));
+      this.printer.end(...messages);
     }
 
     this.printer.end();
@@ -76,18 +76,11 @@ export class BddReporter extends Reporter {
    * 
    */
   protected onSpecStartNote(note: SpecStartNote) {
-    this.printer.write([
-      Array(this.level * 3).join(' '),
+    this.printer.write(
+      this.getIndentSpaces(this.level),
       note.message,
-      ':',
-    ].join(''));
+    );
     this.printer.end();
-  }
-
-  /**
-   * 
-   */
-  protected onSpecEndNote(note: SpecEndNote) {
   }
 
   /**
@@ -99,13 +92,13 @@ export class BddReporter extends Reporter {
       this.skippedCount++;
     }
 
-    this.printer.write([
-      Array(this.level * 3).join(' '),
+    this.printer.write(
+      this.getIndentSpaces(this.level),
       '→ ',
-      chalk.gray(note.message),
+      this.getColoredText('gray', note.message),
       ' ',
-      note.perform ? '' : chalk.yellowBright('✖ '),
-    ].join(''));
+      skipped ? this.getColoredText('yellowBright', '✖ ') : '',
+    );
   }
 
   /**
@@ -120,10 +113,10 @@ export class BddReporter extends Reporter {
     }
     this.assertionResults = [];
 
-    this.printer.write([
-      chalk[this.findDurationColor(note.duration)](`${note.duration}ms`),
-    ].join(''));
-    this.printer.end();
+    const color = this.getDurationColor(note.duration);
+    this.printer.end(
+      this.getColoredText(color, `${note.duration}ms`)
+    );
   }
 
   /**
@@ -132,15 +125,29 @@ export class BddReporter extends Reporter {
   protected onAssertionNote(note: AssertionNote) {
     this.assertionResults.push(note.success);
 
-    this.printer.write([
-      note.success ? chalk.greenBright('✓ ') : chalk.redBright('✖ '),
-    ].join(''));
+    const passing = note.success;
+    if (passing) {
+      this.printer.write(
+        this.getColoredText('greenBright', '✓ ')
+      );
+    } else {
+      this.printer.write(
+        this.getColoredText('redBright', '✖ ')
+      );
+    }
   }
 
   /**
    * 
    */
-  protected findDurationColor(duration: number) {
+  protected getIndentSpaces(level: number) {
+    return Array(level * 3).join(' ');
+  }
+
+  /**
+   * 
+   */
+  protected getDurationColor(duration: number) {
     if (duration > 100) {
       return 'redBright';
     } else if (duration > 50) {
@@ -148,6 +155,13 @@ export class BddReporter extends Reporter {
     } else {
       return 'greenBright'
     }
+  }
+
+  /**
+   * 
+   */
+  protected getColoredText(color: string, text: any) {
+    return chalk[color](`${text}`);
   }
 
 }
