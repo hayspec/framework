@@ -1,6 +1,5 @@
 import { Stage } from './stage';
 import { Context } from './context';
-import { Reporter } from './reporter';
 
 /**
  * 
@@ -15,17 +14,10 @@ type ContextHandler<Data> = (context: Context<Data>, stage: Stage<Data>) => (voi
 /**
  * 
  */
-interface SpecRecipe<Data> {
-  stage?: Stage<Data>;
-  reporter?: Reporter;
-}
-
-/**
- * 
- */
-interface TestRecipe<Data> {
+interface PerformRecipes<Data> {
   message: string;
-  handler: ContextHandler<Data> | Spec<Data>;
+  handler?: ContextHandler<Data>
+  spec?: Spec<Data>;
 }
 
 /**
@@ -36,46 +28,70 @@ export class Spec<Data = {}> {
   protected beforeEachHandlers: ContextHandler<Data>[] = [];
   protected afterHandlers: StageHandler<Data>[] = [];
   protected afterEachHandlers: ContextHandler<Data>[] = [];
-  protected testRecipes: TestRecipe<Data>[] = [];
+  protected performRecipes: PerformRecipes<Data>[] = [];
   protected onlyEnabled: boolean = false;
-  protected stage: Stage<Data> = null;
+  protected stage_: Stage<Data> = new Stage<Data>();
+  public parent: Spec<Data> = null;
 
   /**
    * 
    */
-  public constructor(stage?: Stage<Data>) {
-    this.stage = stage ? stage : new Stage<Data>();
+  public get stage() {
+    return this.parent ? this.parent.stage : this.stage_;
   }
 
   /**
    * 
    */
-  public before(handler: StageHandler<Data>) {
-    this.beforeHandlers.push(handler);
+  public isRoot() {
+    return !this.parent;
+  }
+
+  /**
+   * 
+   */
+  public before(handler: StageHandler<Data>, append: boolean = true) {
+    if (append) {
+      this.beforeHandlers.push(handler);
+    } else {
+      this.beforeHandlers.unshift(handler);
+    }
     return this;
   }
 
   /**
    * 
    */
-  public beforeEach(handler: ContextHandler<Data>) {
-    this.beforeEachHandlers.push(handler);
+  public beforeEach(handler: ContextHandler<Data>, append: boolean = true) {
+    if (append) {
+      this.beforeEachHandlers.push(handler);
+    } else {
+      this.beforeEachHandlers.unshift(handler);
+    }
     return this;
   }
 
   /**
    * 
    */
-  public after(handler: StageHandler<Data>) {
-    this.afterHandlers.push(handler);
+  public after(handler: StageHandler<Data>, append: boolean = true) {
+    if (append) {
+      this.afterHandlers.push(handler);
+    } else {
+      this.afterHandlers.unshift(handler);
+    }
     return this;
   }
 
   /**
    * 
    */
-  public afterEach(handler: ContextHandler<Data>) {
-    this.afterEachHandlers.push(handler);
+  public afterEach(handler: ContextHandler<Data>, append: boolean = true) {
+    if (append) {
+      this.afterEachHandlers.push(handler);
+    } else {
+      this.afterEachHandlers.unshift(handler);
+    }
     return this;
   }
 
@@ -83,14 +99,14 @@ export class Spec<Data = {}> {
    * 
    */
   public spec(message: string, spec: Spec<Data>) {
-    const handler = spec.clone();
+    spec.parent = this;
 
-    this.beforeHandlers.forEach((h) => handler.before(h));
-    this.beforeEachHandlers.forEach((h) => handler.beforeEach(h));
-    this.afterHandlers.forEach((h) => handler.after(h));
-    this.afterEachHandlers.forEach((h) => handler.afterEach(h));
+    this.beforeHandlers.forEach((h) => spec.before(h, false));
+    this.beforeEachHandlers.forEach((h) => spec.beforeEach(h, false));
+    this.afterHandlers.forEach((h) => spec.after(h));
+    this.afterEachHandlers.forEach((h) => spec.afterEach(h));
 
-    this.testRecipes.push({ message, handler });
+    this.performRecipes.push({ message, spec });
 
     return this;
   }
@@ -100,7 +116,7 @@ export class Spec<Data = {}> {
    */
   public test(message: string, handler: ContextHandler<Data>) {
     if (!this.onlyEnabled) {
-      this.testRecipes.push({ message, handler });
+      this.performRecipes.push({ message, handler });
     }
     return this;
   }
@@ -108,8 +124,8 @@ export class Spec<Data = {}> {
   /**
    * 
    */
-  public skip(message: string, handler: ContextHandler<Data>) {
-    this.testRecipes.push({ message, handler: null });
+  public skip(message: string, handler?: ContextHandler<Data>) {
+    this.performRecipes.push({ message, handler: null });
     return this;
   }
 
@@ -118,40 +134,19 @@ export class Spec<Data = {}> {
    */
   public only(message: string, handler: ContextHandler<Data>) {
     this.onlyEnabled = true;
-    this.testRecipes.push({ message, handler });
+    this.performRecipes.push({ message, handler });
     return this;
-  }
-
-  /**
-   *
-   */
-  public clone() {
-    const spec = new Spec(this.stage);
-  
-    this.beforeHandlers.forEach((h) => spec.before(h));
-    this.afterHandlers.forEach((h) => spec.after(h));
-    this.beforeEachHandlers.forEach((h) => spec.beforeEach(h));
-    this.afterEachHandlers.forEach((h) => spec.afterEach(h));
-
-    this.testRecipes.forEach((r) => {
-      if (r.handler instanceof Spec) {
-        spec.spec(r.message, r.handler)
-      } else {
-        spec.test(r.message, r.handler)
-      }
-    });
-
-    return spec;
   }
 
   /**
    * 
    */
   public async perform() {
+    await this.performBegin();
     await this.performBefore();
 
-    for (const recipe of this.testRecipes) {
-      if (recipe.handler instanceof Spec) {
+    for (const recipe of this.performRecipes) {
+      if (recipe.spec) {
         await this.performSpec(recipe);
       } else {
         await this.performTest(recipe);
@@ -159,23 +154,41 @@ export class Spec<Data = {}> {
     }
 
     await this.performAfter();
+    await this.performEnd();
   }
 
   /**
    * 
    */
-  protected async performSpec(recipe: TestRecipe<Data>) {
+  protected async performBegin() {
+    if (this.isRoot()) {
+      this.stage.reporter.begin();
+    }
+  }
+
+  /**
+   * 
+   */
+  protected async performEnd() {
+    if (this.isRoot()) {
+      this.stage.reporter.end();
+    }
+  }
+
+  /**
+   * 
+   */
+  protected async performSpec(recipe: PerformRecipes<Data>) {
     const start = Date.now();
 
-    this.stage.reporter.handle({
+    this.stage.reporter.note({
       type: 'SpecStartNote',
       message: recipe.message,
     });
 
-    const spec = recipe.handler as Spec<Data>;
-    await spec.perform();
+    await recipe.spec.perform();
 
-    this.stage.reporter.handle({
+    this.stage.reporter.note({
       type: 'SpecEndNote',
       duration: Date.now() - start,
     });
@@ -184,10 +197,10 @@ export class Spec<Data = {}> {
   /**
    * 
    */
-  protected async performTest(recipe: TestRecipe<Data>) {
+  protected async performTest(recipe: PerformRecipes<Data>) {
     const start = Date.now();
 
-    this.stage.reporter.handle({
+    this.stage.reporter.note({
       type: 'TestStartNote',
       message: recipe.message,
       perform: !!recipe.handler,
@@ -195,13 +208,12 @@ export class Spec<Data = {}> {
 
     if (recipe.handler) {
       const context = new Context<Data>(this.stage);
-      const handler = recipe.handler as ContextHandler<Data>;
       await this.performBeforeEach(context);
-      await handler(context, this.stage);
+      await recipe.handler(context, this.stage);
       await this.performAfterEach(context);
     }
 
-    this.stage.reporter.handle({
+    this.stage.reporter.note({
       type: 'TestEndNote',
       duration: Date.now() - start,
     });

@@ -3,6 +3,8 @@ import { Reporter } from '../../core/reporter';
 
 test('triggers recipe callbacks', async (t) => {
   const stat = {
+    onBegin: 0,
+    onEnd: 0,
     onNote: 0,
     onSpecStartNote: 0,
     onSpecEndNote: 0,
@@ -11,6 +13,8 @@ test('triggers recipe callbacks', async (t) => {
     onAssertionNote: 0,
   };
   const reporter = new Reporter({
+    onBegin: () => stat.onBegin++,
+    onEnd: () => stat.onEnd++,
     onNote: () => stat.onNote++,
     onSpecStartNote: () => stat.onSpecStartNote++,
     onSpecEndNote: () => stat.onSpecEndNote++,
@@ -18,30 +22,34 @@ test('triggers recipe callbacks', async (t) => {
     onTestEndNote: () => stat.onTestEndNote++,
     onAssertionNote: () => stat.onAssertionNote++,
   });
-  reporter.handle({
+  reporter.begin();
+  reporter.note({
     type: 'SpecStartNote',
     message: 'foo',
   });
-  reporter.handle({
+  reporter.note({
     type: 'SpecEndNote',
     duration: 0,
   });
-  reporter.handle({
+  reporter.note({
     type: 'TestStartNote',
     message: 'foo',
     perform: true,
   });
-  reporter.handle({
+  reporter.note({
     type: 'TestEndNote',
     duration: 0,
   });
-  reporter.handle({
+  reporter.note({
     type: 'AssertionNote',
     message: 'foo',
     assertion: 'is',
     success: true,
   });
+  reporter.end();
   t.deepEqual(stat, {
+    onBegin: 1,
+    onEnd: 1,
     onNote: 5,
     onSpecStartNote: 1,
     onSpecEndNote: 1,
@@ -51,37 +59,20 @@ test('triggers recipe callbacks', async (t) => {
   });
 });
 
-test('memorizes stats', async (t) => {
+test('memorizes spec block level', async (t) => {
   const reporter = new Reporter();
-  reporter.handle({
+  reporter.note({
     type: 'SpecStartNote',
     message: 'foo',
   });
-  reporter.handle({
-    type: 'SpecStartNote',
-    message: 'foo',
-  });
-  reporter.handle({
-    type: 'SpecStartNote',
-    message: 'foo',
-  });
-  reporter.handle({
+  reporter.note({
     type: 'TestStartNote',
     message: 'foo',
     perform: true,
   });
-  reporter.handle({
+  reporter.note({
     type: 'SpecEndNote',
     duration: 0,
   });
-  reporter.handle({
-    type: 'AssertionNote',
-    message: 'foo',
-    assertion: 'is',
-    success: true,
-  });
-  t.is(reporter.specCount, 3);
-  t.is(reporter.testCount, 1);
-  t.is(reporter.assertionCount, 1);
-  t.is(reporter.currentLevel, 3);
+  t.is(reporter.level, 1);
 });

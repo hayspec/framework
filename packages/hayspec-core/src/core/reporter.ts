@@ -9,6 +9,8 @@ export type ReporterNote = SpecStartNote | SpecEndNote | TestStartNote | TestEnd
  * 
  */
 export interface ReporterRecipe {
+  onBegin?: () => void;
+  onEnd?: () => void;
   onNote?: (note: ReporterNote, change: ReporterLevelChange) => void;
   onSpecStartNote?: (note: SpecStartNote) => void;
   onSpecEndNote?: (note: SpecEndNote) => void;
@@ -27,10 +29,7 @@ export type ReporterLevelChange = -1 | 0 | 1;
  */
 export class Reporter {
   protected recipe: ReporterRecipe;
-  public currentLevel: number = 0;
-  public specCount: number = 0;
-  public testCount: number = 0;
-  public assertionCount: number = 0;
+  protected level_: number = 0;
 
   /**
    * 
@@ -42,29 +41,48 @@ export class Reporter {
   /**
    * 
    */
-  public handle(note: ReporterNote) {
-    const currentLevel = this.currentLevel;
+  public get level() {
+    return this.level_;
+  }
+
+  /**
+   * 
+   */
+  public begin() {
+    this.onBegin();
+  }
+
+  /**
+   * 
+   */
+  public end() {
+    this.onEnd();
+    this.reset();
+  }
+
+  /**
+   * 
+   */
+  public note(note: ReporterNote) {
+    const level_ = this.level_;
 
     if (note.type === 'SpecStartNote') {
-      this.currentLevel++;
-      this.specCount++;
+      this.level_++;
       this.onSpecStartNote(note);
     } else if (note.type === 'SpecEndNote') {
-      this.currentLevel--;
+      this.level_--;
       this.onSpecEndNote(note);
     } else if (note.type === 'TestStartNote') {
-      this.testCount++;
-      this.currentLevel++;
+      this.level_++;
       this.onTestStartNote(note);
     } else if (note.type === 'TestEndNote') {
-      this.currentLevel--;
+      this.level_--;
       this.onTestEndNote(note);
     } else if (note.type === 'AssertionNote') {
-      this.assertionCount++;
       this.onAssertionNote(note);
     }
 
-    const change = (currentLevel - this.currentLevel) as ReporterLevelChange;
+    const change = (level_ - this.level_) as ReporterLevelChange;
     this.onNote(note, change);
   }
 
@@ -72,10 +90,25 @@ export class Reporter {
    * 
    */
   public reset() {
-    this.currentLevel = 0;
-    this.specCount = 0;
-    this.testCount = 0;
-    this.assertionCount = 0;  
+    this.level_ = 0;
+  }
+
+  /**
+   * 
+   */
+  protected onBegin() {
+    if (typeof this.recipe.onBegin === 'function') {
+      this.recipe.onBegin();
+    }
+  }
+
+  /**
+   * 
+   */
+  protected onEnd() {
+    if (typeof this.recipe.onEnd === 'function') {
+      this.recipe.onEnd();
+    }
   }
 
   /**

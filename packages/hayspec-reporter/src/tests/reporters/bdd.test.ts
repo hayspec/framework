@@ -6,23 +6,22 @@
 
 
 import * as sleep from 'sleep-promise';
-import { Spec, Stage } from '@hayspec/core';
+import { Spec } from '@hayspec/core';
 import { BddReporter } from '../../reporters/bdd';
 
 const reporter = new BddReporter();
-const stage = new Stage(reporter);
 
-const colors = new Spec(stage);
+const colors = new Spec();
 colors.test('correctly checks all the supported interfaces', async (context, stage) => {
-  context.is(true, await sleep(1000).then(() => true));
+  context.is(true, await sleep(0).then(() => true));
 });
 colors.test('returns correct balanceOf after mint', async (context, stage) => {
-  context.is(true, await sleep(1000).then(() => true));
-  context.is(true, await sleep(1000).then(() => false));
-  context.is(true, await sleep(1000).then(() => true));
+  context.is(true, await sleep(0).then(() => true));
+  context.is(true, await sleep(0).then(() => false));
+  context.is(true, await sleep(110).then(() => true));
 });
 
-export const weights = new Spec(stage);
+export const weights = new Spec();
 weights.test('throws when trying to mint 2 NFTs with the same claim', async (context, stage) => {
   context.is(true, await sleep(1000).then(() => true));
 });
@@ -33,7 +32,7 @@ weights.test('throws when trying to mint NFT to 0x0 address', async (context, st
   context.is(true, await sleep(10).then(() => true));
 });
 
-export const base = new Spec(stage);
+export const base = new Spec();
 base.test('throws when trying to get approval of non-existing NFT id', async (context, stage) => {
   context.is(true, true);
 });
@@ -45,4 +44,5 @@ base.test('throws when trying to approve NFT ID which it already owns', async (c
   context.is(true, true);
 });
 
+base.stage.reporter = reporter;
 base.perform();

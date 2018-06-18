@@ -19,7 +19,7 @@ interface AssertionRecipe {
  */
 export class Context<Data = {}> {
   protected data: Data = {} as any;
-  readonly stage: Stage<Data>;
+  public stage: Stage<Data>;
 
   /**
    * 
@@ -27,7 +27,7 @@ export class Context<Data = {}> {
   public constructor(stage?: Stage<Data>) {
     this.stage = stage || new Stage<Data>();
   }
-  
+
   /**
    * 
    */
@@ -218,7 +218,7 @@ export class Context<Data = {}> {
       } as AssertionNote;
     }
     const printResult = (result: AssertionNote) => {
-      this.stage.reporter.handle(result);
+      this.stage.reporter.note(result);
       return result;
     };
 
