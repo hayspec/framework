@@ -10,6 +10,5 @@
 ## Development
 
 ```
-$ npx lerna run build
 $ npx lerna publish --force-publish
 ```
