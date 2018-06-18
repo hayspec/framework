@@ -45,33 +45,27 @@ export class Reporter {
   public handle(note: ReporterNote) {
     const currentLevel = this.currentLevel;
 
-    const performNoteHandler = (handler, args) => {
-      if (typeof handler === 'function') {
-        handler.call(this, ...args);
-      }
-    };
-
     if (note.type === 'SpecStartNote') {
       this.currentLevel++;
       this.specCount++;
-      performNoteHandler(this.recipe.onSpecStartNote, [note]);
+      this.onSpecStartNote(note);
     } else if (note.type === 'SpecEndNote') {
       this.currentLevel--;
-      performNoteHandler(this.recipe.onSpecEndNote, [note]);
+      this.onSpecEndNote(note);
     } else if (note.type === 'TestStartNote') {
       this.testCount++;
       this.currentLevel++;
-      performNoteHandler(this.recipe.onTestStartNote, [note]);
+      this.onTestStartNote(note);
     } else if (note.type === 'TestEndNote') {
       this.currentLevel--;
-      performNoteHandler(this.recipe.onTestEndNote, [note]);
+      this.onTestEndNote(note);
     } else if (note.type === 'AssertionNote') {
       this.assertionCount++;
-      performNoteHandler(this.recipe.onAssertionNote, [note]);
+      this.onAssertionNote(note);
     }
 
     const change = (currentLevel - this.currentLevel) as ReporterLevelChange;
-    performNoteHandler(this.recipe.onNote, [note, change]);
+    this.onNote(note, change);
   }
 
   /**
@@ -82,6 +76,60 @@ export class Reporter {
     this.specCount = 0;
     this.testCount = 0;
     this.assertionCount = 0;  
+  }
+
+  /**
+   * 
+   */
+  protected onSpecStartNote(note: SpecStartNote) {
+    if (typeof this.recipe.onSpecStartNote === 'function') {
+      this.recipe.onSpecStartNote(note);
+    }
+  }
+
+  /**
+   * 
+   */
+  protected onSpecEndNote(note: SpecEndNote) {
+    if (typeof this.recipe.onSpecEndNote === 'function') {
+      this.recipe.onSpecEndNote(note);
+    }
+  }
+
+  /**
+   * 
+   */
+  protected onTestStartNote(note: TestStartNote) {
+    if (typeof this.recipe.onTestStartNote === 'function') {
+      this.recipe.onTestStartNote(note);
+    }
+  }
+
+  /**
+   * 
+   */
+  protected onTestEndNote(note: TestEndNote) {
+    if (typeof this.recipe.onTestEndNote === 'function') {
+      this.recipe.onTestEndNote(note);
+    }
+  }
+
+  /**
+   * 
+   */
+  protected onAssertionNote(note: AssertionNote) {
+    if (typeof this.recipe.onAssertionNote === 'function') {
+      this.recipe.onAssertionNote(note);
+    }
+  }
+
+  /**
+   * 
+   */
+  protected onNote(note: ReporterNote, change: ReporterLevelChange) {
+    if (typeof this.recipe.onNote === 'function') {
+      this.recipe.onNote(note, change);
+    }
   }
 
 }
