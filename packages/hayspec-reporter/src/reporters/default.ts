@@ -94,10 +94,9 @@ export class DefaultReporter extends Reporter {
 
     this.printer.write(
       this.getIndentSpaces(this.level),
-      '→ ',
       this.getColoredText('gray', note.message),
       ' ',
-      skipped ? this.getColoredText('yellowBright', '✖ ') : '',
+      skipped ? this.getColoredText('yellowBright', '⚑ ') : '',
     );
   }
 
@@ -132,11 +131,11 @@ export class DefaultReporter extends Reporter {
     const passing = note.success;
     if (passing) {
       this.printer.write(
-        this.getColoredText('greenBright', '✓ ')
+        this.getColoredText('greenBright', '⚑ ')
       );
     } else {
       this.printer.write(
-        this.getColoredText('redBright', '✖ ')
+        this.getColoredText('redBright', '⚑ ')
       );
     }
   }

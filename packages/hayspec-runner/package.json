@@ -1,7 +1,7 @@
 {
-  "name": "@hayspec/reporter",
-  "version": "0.1.0-alpha1",
-  "description": "Reporter for Hayspec framework.",
+  "name": "@hayspec/runner",
+  "version": "0.1.0-alpha0",
+  "description": "Tests runner for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -9,7 +9,7 @@
     "transpile": "npm run clean; tsc",
     "lint": "tslint 'src/**/*.ts?(x)'",
     "prepublishOnly": "npm run transpile",
-    "test": "ava"
+    "test": "ava --verbose"
   },
   "ava": {
     "compileEnhancements": false,
@@ -32,7 +32,7 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
-    "@hayspec/core": "^0.1.0-alpha9",
-    "chalk": "^2.4.1"
+    "@hayspec/core": "0.1.0-alpha9",
+    "fast-glob": "2.2.2"
   }
 }
