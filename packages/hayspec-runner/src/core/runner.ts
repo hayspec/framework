@@ -23,7 +23,7 @@ export interface RunnerOptions {
  */
 export class Runner {
   protected options: RunnerOptions;
-  public results: RunnerResult[] = [];
+  protected results: RunnerResult[] = [];
 
   /**
    * 
@@ -53,9 +53,24 @@ export class Runner {
   }
 
   /**
+   *
+   */
+  public serialize () {
+    return JSON.parse(JSON.stringify(this.results));
+  }
+
+  /**
+   *
+   */
+  public clear () {
+    this.results = [];
+    return this;
+  }
+
+  /**
    * 
    */
-  public async loadSpec(file: string) {
+  protected async loadSpec(file: string) {
     const spec = require(file);
 
     if (spec instanceof Spec) {

@@ -24,7 +24,7 @@ weights.test('is too heavy', (context, stage) => {});
 weights.test('is too light', (context, stage) => {});
 
 
-export const spec = new Spec<Data>();
+const spec = new Spec<Data>();
 
 spec.before((stage) => {
   stage.set('id', 100);

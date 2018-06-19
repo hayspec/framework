@@ -9,7 +9,7 @@
     "transpile": "npm run clean; tsc",
     "lint": "tslint 'src/**/*.ts?(x)'",
     "prepublishOnly": "npm run transpile",
-    "test": "ava --verbose"
+    "test": "ava"
   },
   "ava": {
     "compileEnhancements": false,

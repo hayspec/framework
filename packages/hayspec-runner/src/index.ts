@@ -1,1 +1,1 @@
-export * from './lib/runner';
+export * from './core/runner';
