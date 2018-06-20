@@ -1,6 +1,6 @@
 import * as args from 'args';
 import { Runner } from '@hayspec/runner';
-import { Spec } from '@hayspec/core';
+import { Spec, Stage } from '@hayspec/core';
 import { DefaultReporter } from '@hayspec/reporter';
 
 /**
@@ -27,17 +27,17 @@ if (typeof flags.require === 'string') {
 (async function () {
   const pattern = flags.match || '**/*.test.*';
 
+  const reporter = new DefaultReporter();
+  const stage = new Stage(reporter);
+  const test = new Spec(stage);
+
   const runner = new Runner();
   await runner.require(pattern);
-
-  const test = new Spec();
   runner.results.forEach((result) => {
     const message = result.file.substr(process.cwd().length + 1);
     test.spec(message, result.spec);
   });
 
-  const reporter = new DefaultReporter();
-  test.stage.reporter = reporter;
   await test.perform();
     
 })();

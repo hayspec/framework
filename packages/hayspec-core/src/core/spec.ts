@@ -31,14 +31,15 @@ export class Spec<Data = {}> {
   protected afterEachHandlers: ContextHandler<Data>[] = [];
   protected performRecipes: PerformRecipes<Data>[] = [];
   protected onlyEnabled: boolean = false;
-  protected stage_: Stage<Data> = this.createStage();
-  public parent: Spec<Data> = null;
+  public stage: Stage<Data>;
+  public parent: Spec<Data>;
 
   /**
    * 
    */
-  public get stage() {
-    return this.parent ? this.parent.stage : this.stage_;
+  public constructor(stage?: Stage<Data>, parent?: Spec<Data>) {
+    this.parent = parent || null;
+    this.stage = stage || this.createStage();
   }
 
   /**
@@ -101,7 +102,8 @@ export class Spec<Data = {}> {
    */
   public spec(message: string, spec: Spec<Data>) {
     spec.parent = this;
-
+    spec.stage = this.stage;
+  
     this.beforeHandlers.forEach((h) => spec.before(h, false));
     this.beforeEachHandlers.forEach((h) => spec.beforeEach(h, false));
     this.afterHandlers.forEach((h) => spec.after(h));

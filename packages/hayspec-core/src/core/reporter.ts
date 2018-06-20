@@ -29,20 +29,13 @@ export type ReporterLevelChange = -1 | 0 | 1;
  */
 export class Reporter {
   protected recipe: ReporterRecipe;
-  protected level_: number = 0;
+  public level: number = 0;
 
   /**
    * 
    */
   public constructor(recipe?: ReporterRecipe) {
     this.recipe = recipe || {};
-  }
-
-  /**
-   * 
-   */
-  public get level() {
-    return this.level_;
   }
 
   /**
@@ -64,25 +57,25 @@ export class Reporter {
    * 
    */
   public note(note: ReporterNote) {
-    const level_ = this.level_;
+    const level = this.level;
 
     if (note.type === 'SpecStartNote') {
-      this.level_++;
+      this.level++;
       this.onSpecStartNote(note);
     } else if (note.type === 'SpecEndNote') {
-      this.level_--;
+      this.level--;
       this.onSpecEndNote(note);
     } else if (note.type === 'TestStartNote') {
-      this.level_++;
+      this.level++;
       this.onTestStartNote(note);
     } else if (note.type === 'TestEndNote') {
-      this.level_--;
+      this.level--;
       this.onTestEndNote(note);
     } else if (note.type === 'AssertionNote') {
       this.onAssertionNote(note);
     }
 
-    const change = (level_ - this.level_) as ReporterLevelChange;
+    const change = (level - this.level) as ReporterLevelChange;
     this.onNote(note, change);
   }
 
@@ -90,7 +83,7 @@ export class Reporter {
    * 
    */
   public reset() {
-    this.level_ = 0;
+    this.level = 0;
   }
 
   /**

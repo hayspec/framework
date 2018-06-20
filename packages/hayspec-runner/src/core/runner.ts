@@ -23,7 +23,7 @@ export interface RunnerOptions {
  */
 export class Runner {
   protected options: RunnerOptions;
-  protected results: RunnerResult[] = [];
+  public results: RunnerResult[] = [];
 
   /**
    * 
@@ -50,13 +50,6 @@ export class Runner {
     files.forEach((file) => {
       this.loadSpec(file);
     });
-  }
-
-  /**
-   *
-   */
-  public serialize () {
-    return JSON.parse(JSON.stringify(this.results));
   }
 
   /**

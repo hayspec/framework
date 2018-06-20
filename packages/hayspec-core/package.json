@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/core",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Core logic for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
