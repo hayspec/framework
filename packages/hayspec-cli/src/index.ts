@@ -39,5 +39,4 @@ if (typeof flags.require === 'string') {
   });
 
   await test.perform();
-    
 })();
