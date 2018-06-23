@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "publish": "lerna publish --force-publish",
     "test": "lerna run test"
   },
@@ -26,7 +27,6 @@
   ],
   "author": "Kristijan Sedlak (Xpepermint)",
   "devDependencies": {
-    "lerna": "^2.11.0",
-    "yarn": "1.7.0"
+    "lerna": "2.11.0"
   }
 }

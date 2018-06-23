@@ -55,7 +55,7 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
-    "@hayspec/core": "^0.3.3",
+    "@hayspec/core": "latest",
     "fast-glob": "^2.2.2"
   }
 }
