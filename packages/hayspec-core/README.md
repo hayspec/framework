@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/hayspec/core.svg?branch=master)&nbsp;[![NPM Version](https://badge.fury.io/js/@hayspec%2Fcore.svg)](https://badge.fury.io/js/hayspec%2Fcore)&nbsp;[![Dependencies Status](https://david-dm.org/hayspec/core.svg)](https://david-dm.org/hayspec/core)&nbsp;
+![Build Status](https://travis-ci.org/hayspec/monorepo.svg?branch=master)&nbsp;[![NPM Version](https://badge.fury.io/js/@hayspec%2Fcore.svg)](https://badge.fury.io/js/hayspec%2Fcore)&nbsp;[![Dependencies Status](https://david-dm.org/hayspec/core.svg)](https://david-dm.org/hayspec/core)&nbsp;
 
 # [@hayspec](https://github.com/hayspec/monorepo)/core
 
