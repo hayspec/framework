@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/cli",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "CLI for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -38,9 +38,9 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
-    "@hayspec/core": "^0.3.0",
-    "@hayspec/reporter": "^0.3.0",
-    "@hayspec/runner": "^0.3.0",
+    "@hayspec/core": "^0.3.1",
+    "@hayspec/reporter": "^0.3.1",
+    "@hayspec/runner": "^0.3.1",
     "yargs": "^11.0.0"
   }
 }
