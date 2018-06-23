@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/cli",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "CLI for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -29,8 +29,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/args": "^3.0.0",
     "@types/node": "^10.3.2",
+    "@types/yargs": "^11.0.0",
     "ava": "^1.0.0-beta.6",
     "eslint": "4.19.1",
     "ts-node": "^6.1.0",
@@ -38,9 +38,9 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
-    "@hayspec/core": "^0.2.6",
-    "@hayspec/reporter": "^0.2.6",
-    "@hayspec/runner": "^0.2.6",
-    "args": "^5.0.0"
+    "@hayspec/core": "^0.3.0",
+    "@hayspec/reporter": "^0.3.0",
+    "@hayspec/runner": "^0.3.0",
+    "yargs": "^11.0.0"
   }
 }

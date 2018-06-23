@@ -1,0 +1,16 @@
+{
+  "name": "@hayspec/example",
+  "version": "0.3.0",
+  "description": "Hayspec framework example.",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "hayspec --require ts-node/register"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@hayspec/cli": "^0.3.0",
+    "@hayspec/core": "^0.3.0",
+    "ts-node": "^6.1.0",
+    "typescript": "^2.9.1"
+  }
+}
