@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/example",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Hayspec framework example.",
   "main": "./dist/index.js",
   "scripts": {
@@ -17,8 +17,8 @@
   "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
   "devDependencies": {
-    "@hayspec/cli": "^0.3.1",
-    "@hayspec/core": "^0.3.1",
+    "@hayspec/cli": "^0.3.2",
+    "@hayspec/core": "^0.3.2",
     "ts-node": "^6.1.0",
     "typescript": "^2.9.1"
   }
