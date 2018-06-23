@@ -27,6 +27,28 @@
       "src/tests/**/*.test.ts"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayspec/monorepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hayspec/monorepo/issues"
+  },
+  "homepage": "https://github.com/hayspec/monorepo#readme",
+  "keywords": [
+    "test",
+    "testing",
+    "spec",
+    "specification",
+    "hay",
+    "javascript",
+    "typescript",
+    "nodejs",
+    "tdd",
+    "unit",
+    "cli"
+  ],
+  "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^10.3.2",

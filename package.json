@@ -1,4 +1,29 @@
 {
+	"scripts": {
+		"publish": "lerna publish --force-publish"
+	},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayspec/monorepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hayspec/monorepo/issues"
+  },
+  "homepage": "https://github.com/hayspec/monorepo#readme",
+  "keywords": [
+    "test",
+    "testing",
+    "spec",
+    "specification",
+    "hay",
+    "javascript",
+    "typescript",
+    "nodejs",
+    "tdd",
+    "unit",
+    "cli"
+  ],
+  "author": "Kristijan Sedlak (Xpepermint)",
 	"devDependencies": {
 		"lerna": "^2.11.0"
 	}

@@ -1,3 +1,13 @@
+![Build Status](https://travis-ci.org/hayspec/runner.svg?branch=master)&nbsp;[![NPM Version](https://badge.fury.io/js/@hayspec%2Frunner.svg)](https://badge.fury.io/js/hayspec%2Frunner)&nbsp;[![Dependencies Status](https://david-dm.org/hayspec/runner.svg)](https://david-dm.org/hayspec/runner)&nbsp;
+
+# [@hayspec](https://github.com/hayspec/monorepo)/runner
+
+This package provides the logic for discovering and performing test files.
+
+## Usage
+
+The package provides the `Runner` class which can load and perform test files.
+
 ```ts
 import { Spec } from '@hayspec/core';
 import { Runner } from '@hayspec/runner';

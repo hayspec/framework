@@ -6,6 +6,15 @@
   "scripts": {
     "test": "hayspec --require ts-node/register"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayspec/monorepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hayspec/monorepo/issues"
+  },
+  "homepage": "https://github.com/hayspec/monorepo#readme",
+  "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
   "devDependencies": {
     "@hayspec/cli": "^0.3.1",
