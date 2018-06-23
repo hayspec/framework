@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/hayspec/monorepo.svg?branch=master)&nbsp;[![NPM Version](https://badge.fury.io/js/@hayspec%2Freporter.svg)](https://badge.fury.io/js/hayspec%2Freporter)&nbsp;[![Dependencies Status](https://david-dm.org/hayspec/reporter.svg)](https://david-dm.org/hayspec/reporter)&nbsp;
+![Build Status](https://travis-ci.org/hayspec/monorepo.svg?branch=master)&nbsp;[![NPM Version](https://badge.fury.io/js/@hayspec%2Freporter.svg)](https://badge.fury.io/js/hayspec%2Freporter)
 
 # [@hayspec](https://github.com/hayspec/monorepo)/reporter
 
