@@ -17,8 +17,8 @@
   "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
   "devDependencies": {
-    "@hayspec/cli": "latest",
-    "@hayspec/core": "latest",
+    "@hayspec/cli": "0.3.3",
+    "@hayspec/core": "0.3.3",
     "ts-node": "^6.1.0",
     "typescript": "^2.9.1"
   }

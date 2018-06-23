@@ -60,9 +60,9 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
-    "@hayspec/core": "latest",
-    "@hayspec/reporter": "latest",
-    "@hayspec/runner": "latest",
+    "@hayspec/core": "0.3.3",
+    "@hayspec/reporter": "0.3.3",
+    "@hayspec/runner": "0.3.3",
     "yargs": "^11.0.0"
   }
 }

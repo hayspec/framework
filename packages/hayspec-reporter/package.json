@@ -54,7 +54,7 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
-    "@hayspec/core": "latest",
+    "@hayspec/core": "0.3.3",
     "chalk": "^2.4.1"
   }
 }
