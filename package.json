@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"publish": "lerna publish --force-publish"
+		"publish": "lerna publish --force-publish",
+    "test": "lerna run test"
 	},
   "repository": {
     "type": "git",
