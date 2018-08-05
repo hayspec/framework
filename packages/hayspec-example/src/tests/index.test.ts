@@ -1,11 +1,14 @@
 import { Spec } from '@hayspec/core';
-import * as example from '..';
+import * as index from '..';
+
+/**
+ * Testing module interface.
+ */
 
 const spec = new Spec();
 
-spec.test('method `isHay` returns `true`', (ctx) => {
-  const isHay = example.isHay();
-  ctx.true(isHay);
+spec.test('isHay() returns true', (ctx) => {
+  ctx.true(index.isHay());
 });
 
 export default spec;

@@ -1,4 +1,4 @@
-import { Reporter, SpecStartNote, SpecEndNote, TestStartNote, TestEndNote, AssertionNote } from '@hayspec/core';
+import { Reporter, SpecStartNote, SpecEndNote, TestStartNote, TestEndNote, AssertionNote } from '@hayspec/spec';
 import chalk from 'chalk';
 import { Printer } from '../lib/printer';
 

@@ -1,5 +1,5 @@
 import { Runner } from '@hayspec/runner';
-import { Spec, Stage } from '@hayspec/core';
+import { Spec, Stage } from '@hayspec/spec';
 import { DefaultReporter } from '@hayspec/reporter';
 
 /**

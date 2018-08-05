@@ -1,4 +1,4 @@
-import { Spec } from '@hayspec/core';
+import { Spec } from '@hayspec/spec';
 
 const spec = new Spec();
 

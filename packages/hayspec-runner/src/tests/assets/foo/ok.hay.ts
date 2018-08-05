@@ -1,3 +1,3 @@
-import { Spec } from '@hayspec/core';
+import { Spec } from '@hayspec/spec';
 
 export default new Spec();
