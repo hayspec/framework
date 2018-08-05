@@ -1,10 +1,13 @@
 {
   "name": "@hayspec/example",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "Hayspec framework example.",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "hayspec --require ts-node/register"
+    "transpile": "tsc",
+    "prepublishOnly": "npm run transpile",
+    "test": "hayspec test --require ts-node/register --match ./src/tests/assets/**/*.test.ts"
   },
   "repository": {
     "type": "git",
@@ -17,8 +20,8 @@
   "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
   "devDependencies": {
-    "@hayspec/cli": "^0.3.4",
-    "@hayspec/core": "^0.3.4",
+    "@hayspec/cli": "latest",
+    "@hayspec/spec": "latest",
     "ts-node": "^6.1.0",
     "typescript": "^2.9.1"
   }
