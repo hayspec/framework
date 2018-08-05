@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/example",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Hayspec framework example.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -24,5 +24,6 @@
     "@hayspec/spec": "latest",
     "ts-node": "^6.1.0",
     "typescript": "^2.9.1"
-  }
+  },
+  "gitHead": "4004500fb654e4c874bc84eb3a1582b66e3126f8"
 }

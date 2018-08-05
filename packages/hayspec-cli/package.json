@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/cli",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "CLI for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -65,5 +65,6 @@
     "@hayspec/runner": "latest",
     "@hayspec/spec": "latest",
     "yargs": "^11.0.0"
-  }
+  },
+  "gitHead": "4004500fb654e4c874bc84eb3a1582b66e3126f8"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/init",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Project generator for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -34,5 +34,6 @@
   },
   "dependencies": {
     "fs-extra": "^6.0.1"
-  }
+  },
+  "gitHead": "4004500fb654e4c874bc84eb3a1582b66e3126f8"
 }
