@@ -9,7 +9,7 @@ This package provides the default framework command-line reporter.
 The reporter is attached to the `stage` object which can be further passed into the root `Spec` instance.
 
 ```ts
-import { Spec, Stage } from '@hayspec/core';
+import { Spec, Stage } from '@hayspec/spec';
 import { Reporter } from '@hayspec/reporter';
 
 const reporter = new Reporter();

@@ -9,7 +9,7 @@ This package provides the logic for discovering and performing test files.
 The package provides the `Runner` class which can load and perform test files.
 
 ```ts
-import { Spec } from '@hayspec/core';
+import { Spec } from '@hayspec/spec';
 import { Runner } from '@hayspec/runner';
 
 const runner = new Runner();

@@ -1,4 +1,4 @@
-import { Spec } from '@hayspec/core';
+import { Spec } from '@hayspec/spec';
 import * as index from '..';
 
 /**

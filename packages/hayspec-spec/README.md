@@ -9,7 +9,7 @@ This package provides the main framework features for writing automatic tests.
 Run the command below to install the package.
 
 ```
-npm install --save @hayspec/core
+npm install --save @hayspec/spec
 ```
 
 This package uses promises thus you need to use [Promise polyfill](https://github.com/taylorhakes/promise-polyfill) when promises are not supported.
@@ -25,7 +25,7 @@ Below we explain some of the most important parts of this framework. You should 
 The framework provides a `Spec` class which holds basically the whole testing power. You start your test by creating an instance of that class.
 
 ```ts
-import { Spec } from '@hayspec/core';
+import { Spec } from '@hayspec/spec';
 
 const spec = new Spec();
 ```

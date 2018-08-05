@@ -5,7 +5,7 @@ test.skip('foo', async (t) => {
 });
 
 
-// import { Spec } from '@hayspec/core';
+// import { Spec } from '@hayspec/spec';
 // import { DefaultReporter } from '../../reporters/default';
 
 // const reporter = new DefaultReporter();
