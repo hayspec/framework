@@ -37,7 +37,7 @@ export const files = [
       `  "scripts": {`,
       `    "transpile": "tsc",`,
       `    "prepublishOnly": "npm run transpile",`,
-      `    "test": "hayspec test --require ts-node/register --match ./src/tests/assets/**/*.test.ts"`,
+      `    "test": "hayspec test --require ts-node/register --match ./src/tests/**/*.test.ts"`,
       `  },`,
       `  "license": "MIT",`,
       `  "devDependencies": {`,
