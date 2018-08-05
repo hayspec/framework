@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/init",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Project generator for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -24,6 +24,27 @@
       "src/tests/**/*.test.ts"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayspec/monorepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hayspec/monorepo/issues"
+  },
+  "homepage": "https://github.com/hayspec/monorepo#readme",
+  "keywords": [
+    "test",
+    "testing",
+    "spec",
+    "specification",
+    "hay",
+    "javascript",
+    "typescript",
+    "nodejs",
+    "init",
+    "initialize"
+  ],
+  "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
   "devDependencies": {
     "@types/fs-extra": "^5.0.3",
