@@ -18,19 +18,22 @@ test('method perform() executes spec stack', async (t) => {
   spec1.before(() => { results.push('1-before-0'); });
   const spec0 = new Spec();
   spec0.test('', () => { results.push('0-0'); });
-  spec0.before(() => { results.push('0-before-0'); });
+  spec0.before(() => { results.push('0-before-0a'); });
+  spec0.before(() => { results.push('0-before-0b'); });
   spec0.beforeEach(() => { results.push('0-beforeeach-0'); });
   spec0.after(() => { results.push('0-after-0'); });
   spec0.afterEach(() => { results.push('0-aftereach-0'); });
   spec0.before(() => { results.push('0-before-1'); });
   spec0.beforeEach(() => { results.push('0-beforeeach-1'); });
-  spec0.after(() => { results.push('0-after-1'); });
+  spec0.after(() => { results.push('0-after-1a'); });
+  spec0.after(() => { results.push('0-after-1b'); });
   spec0.afterEach(() => { results.push('0-aftereach-1'); });
   spec0.spec('', spec1);
   spec0.test('', () => { results.push('0-1'); });
   await spec0.perform();
   t.deepEqual(results, [
-    '0-before-0',
+    '0-before-0a',
+    '0-before-0b',
     '0-before-1',
     '0-beforeeach-0',
     '0-beforeeach-1',
@@ -38,7 +41,8 @@ test('method perform() executes spec stack', async (t) => {
     '0-aftereach-0',
     '0-aftereach-1',
     '0-before-1',
-    '0-before-0',
+    '0-before-0b',
+    '0-before-0a',
     '1-before-0',
     '0-beforeeach-1',
     '0-beforeeach-0',
@@ -46,14 +50,16 @@ test('method perform() executes spec stack', async (t) => {
     '0-aftereach-0',
     '0-aftereach-1',
     '0-after-0',
-    '0-after-1',
+    '0-after-1a',
+    '0-after-1b',
     '0-beforeeach-0',
     '0-beforeeach-1',
     '0-1',
     '0-aftereach-0',
     '0-aftereach-1',
     '0-after-0',
-    '0-after-1',
+    '0-after-1a',
+    '0-after-1b',
   ]);
 });
 
