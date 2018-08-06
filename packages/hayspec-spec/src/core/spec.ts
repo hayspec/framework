@@ -31,7 +31,7 @@ export class Spec<Data = {}> {
   protected afterEachHandlers: ContextHandler<Data>[] = [];
   protected performRecipes: PerformRecipes<Data>[] = [];
   protected onlyEnabled: boolean = false;
-  public stage: Stage<Data>;
+  protected _stage: Stage<Data>;
   public parent: Spec<Data>;
 
   /**
@@ -40,6 +40,28 @@ export class Spec<Data = {}> {
   public constructor(stage?: Stage<Data>, parent?: Spec<Data>) {
     this.parent = parent || null;
     this.stage = stage || this.createStage();
+  }
+
+  /**
+   * 
+   */
+  public set stage(s: Stage<Data>) {
+    if (this.parent) {
+      this.parent.stage = s;
+    } else {
+      this._stage = s;
+    }
+  }
+
+  /**
+   * 
+   */
+  public get stage() {
+    if (this.parent) {
+      return this.parent.stage;
+    } else {
+      return this._stage;
+    }
   }
 
   /**
@@ -108,7 +130,6 @@ export class Spec<Data = {}> {
     this.beforeEachHandlers.forEach((h) => spec.beforeEach(h, false));
     this.afterHandlers.forEach((h) => spec.after(h));
     this.afterEachHandlers.forEach((h) => spec.afterEach(h));
-
     this.performRecipes.push({ message, spec });
 
     return this;
