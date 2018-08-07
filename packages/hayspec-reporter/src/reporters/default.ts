@@ -15,9 +15,9 @@ export class DefaultReporter extends Reporter {
   /**
    * 
    */
-  public constructor() {
+  public constructor({ mute = false } = {}) {
     super();
-    this.printer = new Printer();
+    this.printer = new Printer({ mute });
   }
 
   /**
