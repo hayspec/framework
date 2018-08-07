@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/example",
-  "version": "0.4.11",
+  "version": "0.4.12",
   "description": "Hayspec framework example.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
