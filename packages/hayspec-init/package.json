@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/init",
-  "version": "0.4.10",
+  "version": "0.4.11",
   "description": "Project generator for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

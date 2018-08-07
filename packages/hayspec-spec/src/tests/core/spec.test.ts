@@ -128,3 +128,21 @@ test('method spec() appends new spec with shared stage instance', async (t) => {
   t.true(spec2.stage === spec0.stage);
   t.true(spec1.stage === spec0.stage);
 });
+
+test('context instance is shared between atomic stack', async (t) => {
+  const results = [];
+  const spec = new Spec();
+  const ctxs = [];
+  spec.beforeEach((ctx) => {
+    ctxs.push(ctx);
+  });
+  spec.test('', (ctx) => {
+    ctxs.push(ctx);
+  });
+  spec.afterEach((ctx) => {
+    ctxs.push(ctx);
+  });
+  t.true(ctxs[0] === ctxs[1]);
+  t.true(ctxs[1] === ctxs[2]);
+  t.true(ctxs[0] === ctxs[2]);
+});
