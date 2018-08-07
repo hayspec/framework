@@ -103,6 +103,7 @@ test('method perform() performs only selected tests', async (t) => {
   spec0.afterEach(() => { results.push('0-aftereach-1'); });
   spec0.test('', () => { results.push('0-0'); });
   spec0.only('', () => { results.push('0-1'); });
+  spec0.test('', () => { results.push('0-2'); });
   await spec0.perform();
   t.deepEqual(results, [
     '0-before-0',
