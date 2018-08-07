@@ -157,7 +157,11 @@ export class Spec<Data = {}> {
    * 
    */
   public only(message: string, handler: ContextHandler<Data>) {
-    this.onlyEnabled = true;
+    if (!this.onlyEnabled) {
+      this.performRecipes = this.performRecipes.filter((r) => !r.handler);
+    } else {
+      this.onlyEnabled = true;
+    }
     this.performRecipes.push({ message, handler });
     return this;
   }
