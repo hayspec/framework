@@ -8,11 +8,6 @@ import testHandler from './commands/test';
 const { argv } = yargs
   .usage('Usage: $0 --help')
   .command('init', 'Initializes project directory.',  (yargs) => yargs
-    .option('root', {
-      string: true,
-      description: 'Project root folder',
-      default: '.',
-    })
     .option('name', {
       string: true,
       description: 'Project name',

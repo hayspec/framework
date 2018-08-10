@@ -12,8 +12,8 @@ test('runs tests', async (t) => {
 });
 
 test('initializes current folder', async (t) => {
-  const command = `./bin/hayspec init --name foo --description bar --root ./node_modules/.tmp/${Date.now()}`;
+  const command = `mkdir -p ./node_modules/.tmp/test; cd ./node_modules/.tmp/test; ../../../bin/hayspec init --name foo --description bar`;
   const { stdout, stderr } = await exec(command);
-  t.true(stdout.indexOf('Done') !== -1);
+  t.true(stdout.indexOf('Continue by running the commands below:') !== -1);
   t.true(stderr === '');
 });
