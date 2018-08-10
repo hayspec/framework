@@ -1,5 +1,4 @@
 import { Reporter, SpecStartNote, SpecEndNote, TestStartNote, TestEndNote, AssertionNote } from '@hayspec/spec';
-import chalk from 'chalk';
 import { Printer } from '../lib/printer';
 
 /**
@@ -46,22 +45,22 @@ export class DefaultReporter extends Reporter {
     const messages = [];
     if (this.passedCount) {
       messages.push(
-        this.getIndentSpaces(1),
-        this.getColoredText('greenBright', this.passedCount),
+        this.printer.indent(1, ''),
+        this.printer.colorize('greenBright', this.passedCount),
         ' passing',
       );
     }
     if (this.skippedCount) {
       messages.push(
-        this.getIndentSpaces(1),
-        this.getColoredText('yellowBright', this.skippedCount),
+        this.printer.indent(1, ''),
+        this.printer.colorize('yellowBright', this.skippedCount),
         ' skipped',
       );
     }
     if (this.failedCount) {
       messages.push(
-        this.getIndentSpaces(1),
-        this.getColoredText('redBright', this.failedCount),
+        this.printer.indent(1, ''),
+        this.printer.colorize('redBright', this.failedCount),
         ' failed',
       );
     }
@@ -77,7 +76,7 @@ export class DefaultReporter extends Reporter {
    */
   protected onSpecStartNote(note: SpecStartNote) {
     this.printer.write(
-      this.getIndentSpaces(this.level),
+      this.printer.indent(this.level, ''),
       note.message,
     );
     this.printer.end();
@@ -93,10 +92,10 @@ export class DefaultReporter extends Reporter {
     }
 
     this.printer.write(
-      this.getIndentSpaces(this.level),
-      this.getColoredText('gray', note.message),
+      this.printer.indent(this.level, ''),
+      this.printer.colorize('gray', note.message),
       ' ',
-      skipped ? this.getColoredText('yellowBright', '⚑ ') : '',
+      skipped ? this.printer.colorize('yellowBright', '⚑ ') : '',
     );
   }
 
@@ -115,7 +114,7 @@ export class DefaultReporter extends Reporter {
     const color = this.getDurationColor(note.duration);
     if (color) {
       this.printer.write(
-        this.getColoredText(color, `${note.duration}ms`)
+        this.printer.colorize(color, `${note.duration}ms`)
       );
     }
 
@@ -131,40 +130,26 @@ export class DefaultReporter extends Reporter {
     const passing = note.success;
     if (passing) {
       this.printer.write(
-        this.getColoredText('greenBright', '⚑ ')
+        this.printer.colorize('greenBright', '⚑ ')
       );
     } else {
       this.printer.write(
-        this.getColoredText('redBright', '⚑ ')
+        this.printer.colorize('redBright', '⚑ ')
       );
     }
-  }
-
-  /**
-   * 
-   */
-  protected getIndentSpaces(level: number) {
-    return Array(level * 3).join(' ');
   }
 
   /**
    * 
    */
   protected getDurationColor(duration: number) {
-    if (duration > 200) {
+    if (duration > 1000) {
       return 'redBright';
-    } else if (duration > 100) {
+    } else if (duration > 500) {
       return 'yellowBright';
     } else {
       return null;
     }
-  }
-
-  /**
-   * 
-   */
-  protected getColoredText(color: string, text: any) {
-    return chalk[color](`${text}`);
   }
 
 }

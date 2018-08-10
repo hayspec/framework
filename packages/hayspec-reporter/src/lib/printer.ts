@@ -1,3 +1,5 @@
+import chalk from 'chalk';
+
 /**
  *
  */
@@ -41,6 +43,20 @@ export class Printer {
     if (!this.muted) {
       this.write(...input, '\n\r');
     }
+  }
+
+  /**
+   * 
+   */
+  public colorize(color: string, text: string | number) {
+    return chalk[color](`${text}`);
+  }
+
+  /**
+   * 
+   */
+  public indent(times: number = 1, text: string | number) {
+    return `${Array(times * 3).join(' ')}${text}`;
   }
 
 }
