@@ -4,17 +4,6 @@
     "publish": "lerna publish --force-publish",
     "test": "lerna run test"
   },
-  "nyc": {
-    "extension": [
-      ".ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ],
-    "exclude": [
-      "src/tests"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hayspec/monorepo.git"
