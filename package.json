@@ -4,6 +4,17 @@
     "publish": "lerna publish --force-publish",
     "test": "lerna run test"
   },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "exclude": [
+      "src/tests"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hayspec/monorepo.git"
@@ -27,6 +38,7 @@
   ],
   "author": "Kristijan Sedlak (Xpepermint)",
   "devDependencies": {
-    "lerna": "3.0.0-beta.21"
+    "lerna": "^3.1.1",
+    "nyc": "^12.0.2"
   }
 }

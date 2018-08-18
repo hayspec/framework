@@ -20,10 +20,11 @@ export default spec;
 
 ## Usage
 
+[![codecov](https://codecov.io/gh/hayspec/monorepo/branch/master/graph/badge.svg)](https://codecov.io/gh/hayspec/monorepo)
+
 | Package | Description | Version
 |-|-|-
 | [@hayspec/cli](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-cli) | Command-line interface. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fcli.svg)](https://badge.fury.io/js/hayspec%2Fcli)
-| [@hayspec/example](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-example) | Project example. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fexample.svg)](https://badge.fury.io/js/hayspec%2Fexample)
 | [@hayspec/init](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-init) | Project initializer. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Finit.svg)](https://badge.fury.io/js/hayspec%2Finit)
 | [@hayspec/reporter](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-reporter) | Default command-line reporter. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Freporter.svg)](https://badge.fury.io/js/hayspec%2Freporter)
 | [@hayspec/runner](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-runner) | Helper for loading and performing test files. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Frunner.svg)](https://badge.fury.io/js/hayspec%2Frunner)

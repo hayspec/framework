@@ -12,6 +12,7 @@ test('succeeds for equal values', async (t) => {
 test('fails for not equal values', async (t) => {
   t.false(is(1, 0));
   t.false(is(1, '1'));
+  t.false(is('1', 1));
   t.false(is(false, true));
   t.false(is('foo', 'bar'));
 });
