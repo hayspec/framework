@@ -10,8 +10,7 @@
   "scripts": {
     "clean": "rm -Rf ./dist",
     "transpile": "npm run clean; tsc",
-    "lint": "tslint 'src/**/*.ts?(x)'",
-    "prepublishOnly": "npm run transpile",
+    "prepare": "npm run transpile",
     "test": "npm run transpile && nyc ava"
   },
   "ava": {
@@ -28,12 +27,6 @@
     ]
   },
   "nyc": {
-    "extension": [
-      ".ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ],
     "exclude": [
       "src/tests"
     ]
