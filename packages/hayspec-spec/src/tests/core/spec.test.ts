@@ -14,52 +14,91 @@ test('method isRoot() indicates if the spec is nested or not', async (t) => {
 test('method perform() executes spec stack', async (t) => {
   const results = [];
   const spec1 = new Spec();
-  spec1.test('', () => { results.push('1-0'); });
   spec1.before(() => { results.push('1-before-0'); });
+  spec1.after(() => { results.push('1-after-0'); });
+  spec1.beforeEach(() => { results.push('1-beforeeach-0'); });
+  spec1.afterEach(() => { results.push('1-aftereach-0'); });
+  spec1.test('', () => { results.push('1-0'); });
+  spec1.test('', () => { results.push('1-1'); });
   const spec0 = new Spec();
   spec0.test('', () => { results.push('0-0'); });
-  spec0.before(() => { results.push('0-before-0a'); });
-  spec0.before(() => { results.push('0-before-0b'); });
+  spec0.before(() => { results.push('0-before-0'); });
+  spec0.before(() => { results.push('0-before-1'); });
   spec0.beforeEach(() => { results.push('0-beforeeach-0'); });
+  spec0.beforeEach(() => { results.push('0-beforeeach-1'); });
   spec0.after(() => { results.push('0-after-0'); });
   spec0.afterEach(() => { results.push('0-aftereach-0'); });
-  spec0.before(() => { results.push('0-before-1'); });
-  spec0.beforeEach(() => { results.push('0-beforeeach-1'); });
-  spec0.after(() => { results.push('0-after-1a'); });
-  spec0.after(() => { results.push('0-after-1b'); });
+  spec0.before(() => { results.push('0-before-2'); });
+  spec0.beforeEach(() => { results.push('0-beforeeach-2'); });
+  spec0.after(() => { results.push('0-after-1'); });
+  spec0.after(() => { results.push('0-after-2'); });
   spec0.afterEach(() => { results.push('0-aftereach-1'); });
+  spec0.afterEach(() => { results.push('0-aftereach-2'); });
+  spec0.spec('', spec1);
   spec0.spec('', spec1);
   spec0.test('', () => { results.push('0-1'); });
   await spec0.perform();
   t.deepEqual(results, [
-    '0-before-0a',
-    '0-before-0b',
+    '0-before-0',
     '0-before-1',
+    '0-before-2',
     '0-beforeeach-0',
     '0-beforeeach-1',
+    '0-beforeeach-2',
     '0-0',
     '0-aftereach-0',
     '0-aftereach-1',
-    '0-before-1',
-    '0-before-0b',
-    '0-before-0a',
+    '0-aftereach-2',
     '1-before-0',
-    '0-beforeeach-1',
     '0-beforeeach-0',
+    '0-beforeeach-1',
+    '0-beforeeach-2',
+    '1-beforeeach-0',
     '1-0',
+    '1-aftereach-0',
     '0-aftereach-0',
     '0-aftereach-1',
-    '0-after-0',
-    '0-after-1a',
-    '0-after-1b',
+    '0-aftereach-2',
     '0-beforeeach-0',
     '0-beforeeach-1',
+    '0-beforeeach-2',
+    '1-beforeeach-0',
+    '1-1',
+    '1-aftereach-0',
+    '0-aftereach-0',
+    '0-aftereach-1',
+    '0-aftereach-2',
+    '1-after-0',
+    '1-before-0',
+    '0-beforeeach-0',
+    '0-beforeeach-1',
+    '0-beforeeach-2',
+    '1-beforeeach-0',
+    '1-0',
+    '1-aftereach-0',
+    '0-aftereach-0',
+    '0-aftereach-1',
+    '0-aftereach-2',
+    '0-beforeeach-0',
+    '0-beforeeach-1',
+    '0-beforeeach-2',
+    '1-beforeeach-0',
+    '1-1',
+    '1-aftereach-0',
+    '0-aftereach-0',
+    '0-aftereach-1',
+    '0-aftereach-2',
+    '1-after-0',
+    '0-beforeeach-0',
+    '0-beforeeach-1',
+    '0-beforeeach-2',
     '0-1',
     '0-aftereach-0',
     '0-aftereach-1',
+    '0-aftereach-2',
     '0-after-0',
-    '0-after-1a',
-    '0-after-1b',
+    '0-after-1',
+    '0-after-2',
   ]);
 });
 

@@ -123,13 +123,14 @@ export class Spec<Data = {}> {
    * 
    */
   public spec(message: string, spec: Spec<Data>) {
-    spec.parent = this;
-    spec.stage = this.stage;
-  
-    this.beforeHandlers.forEach((h) => spec.before(h, false));
-    this.beforeEachHandlers.forEach((h) => spec.beforeEach(h, false));
-    this.afterHandlers.forEach((h) => spec.after(h));
-    this.afterEachHandlers.forEach((h) => spec.afterEach(h));
+    const known = this.performRecipes.filter((r) => r.spec === spec).length > 0;
+    if (!known) {
+      spec.parent = this;
+      spec.stage = this.stage;
+      [].concat(this.beforeEachHandlers).reverse().forEach((h) => spec.beforeEach(h, false));
+      this.afterEachHandlers.forEach((h) => spec.afterEach(h));
+    }
+
     this.performRecipes.push({ message, spec });
 
     return this;
