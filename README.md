@@ -107,7 +107,7 @@ spec.test('is John with id = 100', (ctx) => {
 
 Values set inside the **before** and **after** blocks are available to all **spec** methods. Values set in the **beforeEach** and **afterEach** blocks are available only on the context of each test.
 
-## Hayspec packages
+### Hayspec packages
 
 | Package | Description | Version
 |-|-|-
@@ -117,10 +117,10 @@ Values set inside the **before** and **after** blocks are available to all **spe
 | [@hayspec/runner](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-runner) | Helper for loading and performing test files. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Frunner.svg)](https://badge.fury.io/js/hayspec%2Frunner)
 | [@hayspec/spec](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-spec) | Main framework features for writing tests. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fspec.svg)](https://badge.fury.io/js/hayspec%2Fspec)
 
-## Contributing
+### Contributing
 
 See [CONTRIBUTING.md](https://github.com/hayspec/monorepo/blob/master/CONTRIBUTING.md) for how to help out.
 
-## Licence
+### Licence
 
 See [LICENSE](https://github.com/hayspec/monorepo/blob/master/LICENCE) for details.
