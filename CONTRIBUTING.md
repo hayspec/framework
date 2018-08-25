@@ -14,6 +14,10 @@ We use GitHub issues to track public bugs. Please ensure your description is cle
 
 Please follow the [TypeScript coding guidelines](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines).
 
+## Testing
+
+All features must be well tested. We use [Codecov](https://codecov.io) to analize test coverage. We advise to install the [browser plugin](https://docs.codecov.io/docs/browser-extension) which allows for overlay reports directly in Github.
+
 ## Development
 
 * Don't use lerna commands. Use npm commands instead.
