@@ -71,3 +71,16 @@ See [CONTRIBUTING.md](https://github.com/hayspec/monorepo/blob/master/CONTRIBUTI
 ## Licence
 
 See [LICENSE](https://github.com/hayspec/monorepo/blob/master/LICENCE) for details.
+
+## TODO
+
+Documentation:
+```
+spec.spec('perform an atomic swap', perform);
+perform.test(...) WORKS
+```
+```
+perform.test(...)  DOES NOT
+spec.spec('perform an atomic swap', perform);
+```
+Sequence matters.

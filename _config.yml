@@ -1,0 +1,3 @@
+remote_theme: hayspec/gp-theme
+plugins:
+  - jekyll-remote-theme

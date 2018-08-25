@@ -158,7 +158,6 @@ test('method perform() performs only selected tests', async (t) => {
 });
 
 test('method spec() appends new spec with shared stage instance', async (t) => {
-  const results = [];
   const spec2 = new Spec();
   const spec1 = new Spec();
   const spec0 = new Spec();
@@ -170,7 +169,6 @@ test('method spec() appends new spec with shared stage instance', async (t) => {
 });
 
 test('context instance is shared between atomic stack', async (t) => {
-  const results = [];
   const spec = new Spec();
   const ctxs = [];
   spec.beforeEach((ctx) => {
