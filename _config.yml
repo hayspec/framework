@@ -12,6 +12,7 @@ menu:
   - url: '#writting-tests'
     title: Writing tests
 
-remote_theme: davision/gp-theme
+remote_theme: hayspec/gp-theme
+
 plugins:
   - jekyll-remote-theme
