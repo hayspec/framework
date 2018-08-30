@@ -1,3 +1,17 @@
-remote_theme: hayspec/gp-theme
+title: hayspec
+heading: a magic-free framework for testing JavaScript and NodeJS applications.
+logo: /assets/images/hayspec.svg
+email: info@hayspec.org
+google_analytics: 
+
+menu:
+  - url: '#hayspec-framework'
+    title: What's Hayspec?
+  - url: '#getting-started'
+    title: Get Started
+  - url: '#writting-tests'
+    title: Writing tests
+
+remote_theme: davision/gp-theme
 plugins:
   - jekyll-remote-theme
