@@ -1,8 +1,8 @@
 # Hayspec Framework
 
-[![Build Status](https://travis-ci.org/hayspec/monorepo.svg?branch=master)](https://travis-ci.org/hayspec/monorepo)&nbsp;[![codecov](https://codecov.io/gh/hayspec/monorepo/branch/master/graph/badge.svg)](https://codecov.io/gh/hayspec/monorepo)
+[![Build Status](https://travis-ci.org/hayspec/framework.svg?branch=master)](https://travis-ci.org/hayspec/framework)&nbsp;[![codecov](https://codecov.io/gh/hayspec/framework/branch/master/graph/badge.svg)](https://codecov.io/gh/hayspec/framework)
 
-Hayspec is a lightweight, open source, magic-free framework for testing JavaScript and NodeJS applications. It's written in [TypeScript](https://www.typescriptlang.org/) and it's actively maintained. The source code is available on [GitHub](https://github.com/hayspec/monorepo) where you can also find our [issue tracker](https://github.com/hayspec/monorepo/issues).
+Hayspec is a lightweight, open source, magic-free framework for testing JavaScript and NodeJS applications. It's written in [TypeScript](https://www.typescriptlang.org/) and it's actively maintained. The source code is available on [GitHub](https://github.com/hayspec/framework) where you can also find our [issue tracker](https://github.com/hayspec/framework/issues).
 
 ## Installation of Hayspec
 
@@ -170,16 +170,16 @@ hayspec --require ts-node/register
 
 | Package | Description | Version
 |-|-|-
-| [@hayspec/cli](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-cli) | Command-line interface. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fcli.svg)](https://badge.fury.io/js/hayspec%2Fcli)
-| [@hayspec/init](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-init) | Project initializer. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Finit.svg)](https://badge.fury.io/js/hayspec%2Finit)
-| [@hayspec/reporter](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-reporter) | Default command-line reporter. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Freporter.svg)](https://badge.fury.io/js/hayspec%2Freporter)
-| [@hayspec/runner](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-runner) | Helper for loading and performing test files. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Frunner.svg)](https://badge.fury.io/js/hayspec%2Frunner)
-| [@hayspec/spec](https://github.com/hayspec/monorepo/tree/master/packages/hayspec-spec) | Main framework features for writing tests. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fspec.svg)](https://badge.fury.io/js/hayspec%2Fspec)
+| [@hayspec/cli](https://github.com/hayspec/framework/tree/master/packages/hayspec-cli) | Command-line interface. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fcli.svg)](https://badge.fury.io/js/hayspec%2Fcli)
+| [@hayspec/init](https://github.com/hayspec/framework/tree/master/packages/hayspec-init) | Project initializer. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Finit.svg)](https://badge.fury.io/js/hayspec%2Finit)
+| [@hayspec/reporter](https://github.com/hayspec/framework/tree/master/packages/hayspec-reporter) | Default command-line reporter. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Freporter.svg)](https://badge.fury.io/js/hayspec%2Freporter)
+| [@hayspec/runner](https://github.com/hayspec/framework/tree/master/packages/hayspec-runner) | Helper for loading and performing test files. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Frunner.svg)](https://badge.fury.io/js/hayspec%2Frunner)
+| [@hayspec/spec](https://github.com/hayspec/framework/tree/master/packages/hayspec-spec) | Main framework features for writing tests. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fspec.svg)](https://badge.fury.io/js/hayspec%2Fspec)
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/hayspec/monorepo/blob/master/CONTRIBUTING.md) for how to help out.
+See [CONTRIBUTING.md](https://github.com/hayspec/framework/blob/master/CONTRIBUTING.md) for how to help out.
 
 ## Licence
 
-See [LICENSE](https://github.com/hayspec/monorepo/blob/master/LICENCE) for details.
+See [LICENSE](https://github.com/hayspec/framework/blob/master/LICENCE) for details.

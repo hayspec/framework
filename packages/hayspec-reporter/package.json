@@ -36,12 +36,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hayspec/monorepo.git"
+    "url": "git+https://github.com/hayspec/framework.git"
   },
   "bugs": {
-    "url": "https://github.com/hayspec/monorepo/issues"
+    "url": "https://github.com/hayspec/framework/issues"
   },
-  "homepage": "https://github.com/hayspec/monorepo#readme",
+  "homepage": "https://github.com/hayspec/framework#readme",
   "keywords": [
     "test",
     "testing",

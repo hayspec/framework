@@ -1,5 +1,5 @@
 fixes:
-  - "hayspec/monorepo::/" # travis path to match github repo paths
+  - "hayspec/framework::/" # travis path to match github repo paths
 comment:
   layout: "reach, diff, flags, files"
   behavior: default
