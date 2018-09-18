@@ -170,11 +170,11 @@ hayspec --require ts-node/register
 
 | Package | Description | Version
 |-|-|-
-| [@hayspec/cli](https://github.com/hayspec/framework/tree/master/packages/hayspec-cli) | Command-line interface. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fcli.svg)](https://badge.fury.io/js/hayspec%2Fcli)
-| [@hayspec/init](https://github.com/hayspec/framework/tree/master/packages/hayspec-init) | Project initializer. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Finit.svg)](https://badge.fury.io/js/hayspec%2Finit)
-| [@hayspec/reporter](https://github.com/hayspec/framework/tree/master/packages/hayspec-reporter) | Default command-line reporter. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Freporter.svg)](https://badge.fury.io/js/hayspec%2Freporter)
-| [@hayspec/runner](https://github.com/hayspec/framework/tree/master/packages/hayspec-runner) | Helper for loading and performing test files. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Frunner.svg)](https://badge.fury.io/js/hayspec%2Frunner)
-| [@hayspec/spec](https://github.com/hayspec/framework/tree/master/packages/hayspec-spec) | Main framework features for writing tests. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fspec.svg)](https://badge.fury.io/js/hayspec%2Fspec)
+| [@hayspec/cli](https://github.com/hayspec/framework/tree/master/packages/hayspec-cli) | Command-line interface. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fcli.svg)](https://badge.fury.io/js/%40hayspec%2Fcli)
+| [@hayspec/init](https://github.com/hayspec/framework/tree/master/packages/hayspec-init) | Project initializer. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Finit.svg)](https://badge.fury.io/js/%40hayspec%2Finit)
+| [@hayspec/reporter](https://github.com/hayspec/framework/tree/master/packages/hayspec-reporter) | Default command-line reporter. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Freporter.svg)](https://badge.fury.io/js/%40hayspec%2Freporter)
+| [@hayspec/runner](https://github.com/hayspec/framework/tree/master/packages/hayspec-runner) | Helper for loading and performing test files. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Frunner.svg)](https://badge.fury.io/js/%40hayspec%2Frunner)
+| [@hayspec/spec](https://github.com/hayspec/framework/tree/master/packages/hayspec-spec) | Main framework features for writing tests. | [![NPM Version](https://badge.fury.io/js/@hayspec%2Fspec.svg)](https://badge.fury.io/js/%40hayspec%2Fspec)
 
 ## Contributing
 
