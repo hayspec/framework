@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/hayspec/framework.svg?branch=master)&nbsp;[![NPM Version](https://badge.fury.io/js/@hayspec%2Frunner.svg)](https://badge.fury.io/js/hayspec%2Frunner)
+![Build Status](https://travis-ci.org/hayspec/framework.svg?branch=master)&nbsp;[![NPM Version](https://badge.fury.io/js/@hayspec%2Frunner.svg)](https://badge.fury.io/js/%40hayspec%2Frunner)
 
 This package provides the logic for discovering and performing test files. It's included in the Hayspec CLI, but you can use it to run tests directly from your NodeJS application.
 
