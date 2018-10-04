@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/cli",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "CLI for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,6 +12,14 @@
     "transpile": "npm run clean; tsc",
     "prepare": "npm run transpile",
     "test": "npm run transpile && nyc ava --verbose"
+  },
+  "hayspec": {
+    "require": [
+      "ts-node/register"
+    ],
+    "match": [
+      "./src/**/*.hay.*"
+    ]
   },
   "ava": {
     "compileEnhancements": false,

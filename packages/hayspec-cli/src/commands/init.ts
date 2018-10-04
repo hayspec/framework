@@ -1,12 +1,13 @@
 import * as inquirer from 'inquirer';
 import { Generator } from '@hayspec/init';
 import { Printer } from '@hayspec/reporter';
+import { getConfig } from '../lib/env';
 
 /**
  * Initializes project directory.
  */
 export default async function (argv) {
-  const { name, description } = argv;
+  const { name, description } = getConfig(argv);
   const root = process.cwd();
   const printer = new Printer();
 
