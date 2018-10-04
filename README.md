@@ -166,6 +166,25 @@ Install the [ts-node](https://www.npmjs.com/package/ts-node) NPM package then us
 hayspec --require ts-node/register
 ```
 
+#### Project configuration
+
+Hayspec configuration options can be saved inside the `package.json` file under the the `hayspec` key.
+
+```
+{
+  "hayspec": {
+    "require": [
+      "ts-node/register"
+    ],
+    "match": [
+      "./src/**/*.test.*"
+    ]
+  }
+}
+```
+
+Note that these options can be overriden by providing CLI arguments. 
+
 ## Hayspec packages
 
 | Package | Description | Version

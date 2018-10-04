@@ -1,13 +1,14 @@
 import * as yargs from 'yargs';
 import initHandler from './commands/init';
 import testHandler from './commands/test';
+import { getConfig } from './lib/env';
 
 /**
  * Interface definition.
  */
 const { argv } = yargs
   .usage('Usage: $0 --help')
-  .command('init', 'Initializes project directory.',  (yargs) => yargs
+  .command('init', 'Initializes project directory.', (yargs) => yargs
     .option('name', {
       string: true,
       description: 'Project name',
@@ -21,7 +22,6 @@ const { argv } = yargs
     .option('match', {
       array: true,
       description: 'Match pattern',
-      default: ['./src/cro**/*.test.*'],
     })
     .option('require', {
       array: true,
@@ -35,6 +35,4 @@ const { argv } = yargs
 /**
  * Upgrading environment.
  */
-if (Array.isArray(argv.require)) {
-  argv.require.forEach((v) => require(v));
-}
+getConfig(argv).require.forEach((v) => require(v));
