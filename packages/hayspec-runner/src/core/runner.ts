@@ -68,9 +68,9 @@ export class Runner {
   protected loadSpec(file: string) {
     const spec = require(file);
 
-    if (typeof spec.test !== 'undefined') {
+    if (spec instanceof Spec) {
       this.results.push({ file, spec });
-    } else if (spec.default && typeof spec.default.test !== 'undefined') {
+    } else if (spec.default  instanceof Spec) {
       this.results.push({ file, spec: spec.default });
     }
   }
