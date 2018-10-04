@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/runner",
-  "version": "0.5.1",
+  "version": "0.7.0",
   "description": "Tests runner for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -62,10 +62,10 @@
     "ava": "1.0.0-beta.6",
     "nyc": "^12.0.2",
     "ts-node": "^7.0.1",
-    "typescript": "^3.0.1"
+    "typescript": "^3.1.1"
   },
   "dependencies": {
-    "@hayspec/spec": "^0.5.1",
+    "@hayspec/spec": "^0.7.0",
     "fast-glob": "^2.2.2"
   },
   "gitHead": "03535c698ebd35ec94c63869f18cdde2380f739f"
