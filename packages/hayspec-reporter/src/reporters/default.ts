@@ -7,9 +7,9 @@ import { Printer } from '../lib/printer';
 export class DefaultReporter extends Reporter {
   protected printer: Printer;
   protected assertionResults: boolean[] = [];
-  protected passedCount: number = 0;
-  protected skippedCount: number = 0;
-  protected failedCount: number = 0;
+  public passedCount: number = 0;
+  public skippedCount: number = 0;
+  public failedCount: number = 0;
 
   /**
    * 

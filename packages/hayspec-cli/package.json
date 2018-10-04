@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/cli",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "description": "CLI for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,7 +11,7 @@
     "clean": "rm -Rf ./dist",
     "transpile": "npm run clean; tsc",
     "prepare": "npm run transpile",
-    "test": "npm run transpile && nyc ava"
+    "test": "npm run transpile && nyc ava --verbose"
   },
   "ava": {
     "compileEnhancements": false,
@@ -64,12 +64,11 @@
     "typescript": "^3.0.1"
   },
   "dependencies": {
-    "@hayspec/init": "^0.5.0",
-    "@hayspec/reporter": "^0.5.0",
-    "@hayspec/runner": "^0.5.0",
-    "@hayspec/spec": "^0.5.0",
+    "@hayspec/init": "^0.5.1",
+    "@hayspec/reporter": "^0.5.1",
+    "@hayspec/runner": "^0.5.1",
+    "@hayspec/spec": "^0.5.2",
     "inquirer": "^6.0.0",
     "yargs": "^11.0.0"
-  },
-  "gitHead": "03535c698ebd35ec94c63869f18cdde2380f739f"
+  }
 }

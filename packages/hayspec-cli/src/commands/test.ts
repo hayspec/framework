@@ -18,5 +18,11 @@ export default async function (argv) {
     test.spec(message, result.spec);
   });
 
-  await test.perform();
+  try {
+    await test.perform();
+    process.exit(reporter.failedCount ? 1 : 0);
+  } catch (e) {
+    console.log(e);
+    process.exit(2);
+  }
 }
