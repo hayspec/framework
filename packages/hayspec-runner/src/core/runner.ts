@@ -65,7 +65,7 @@ export class Runner {
    * NOTE: Due to different NPM package managers, the `instanceof` check my be
    * inconsistent thus the function checks for presence of the `test` method.
    */
-  protected async loadSpec(file: string) {
+  protected loadSpec(file: string) {
     const spec = require(file);
 
     if (typeof spec.test !== 'undefined') {
