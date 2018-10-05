@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/cli",
-  "version": "0.7.2",
+  "version": "0.7.4",
   "description": "CLI for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -63,20 +63,20 @@
   "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
   "devDependencies": {
-    "@types/inquirer": "0.0.42",
-    "@types/node": "^10.3.2",
-    "@types/yargs": "^11.0.0",
-    "ava": "1.0.0-beta.6",
-    "nyc": "^12.0.2",
+    "@types/inquirer": "0.0.43",
+    "@types/node": "^10.11.4",
+    "@types/yargs": "^12.0.1",
+    "ava": "^1.0.0-beta.8",
+    "nyc": "^13.0.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.1"
   },
   "dependencies": {
-    "@hayspec/init": "^0.7.2",
-    "@hayspec/reporter": "^0.7.2",
-    "@hayspec/runner": "^0.7.2",
-    "@hayspec/spec": "^0.7.2",
-    "inquirer": "^6.0.0",
-    "yargs": "^11.0.0"
+    "@hayspec/init": "^0.7.4",
+    "@hayspec/reporter": "^0.7.4",
+    "@hayspec/runner": "^0.7.4",
+    "@hayspec/spec": "^0.7.4",
+    "inquirer": "^6.2.0",
+    "yargs": "^12.0.2"
   }
 }
