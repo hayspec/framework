@@ -1,4 +1,5 @@
 import { Reporter } from "./reporter";
+import sleep from '../methods/sleep';
 
 /**
  * 
@@ -26,6 +27,13 @@ export class Stage<Data = {}> {
    */
   public get<Key extends keyof Data>(k: Key) {
     return this.data[k];
+  }
+
+  /**
+   * 
+   */
+  public async sleep(time: number) {
+    return sleep(time);
   }
 
 }
