@@ -380,3 +380,16 @@ test('method `notDeepEqual()` asserts that two objects are equal', async (t) => 
     },
   ]);
 });
+
+test('method `sleep()` continues with timeout', async (t) => {
+  const times = [0, 0, 0];
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
+  times[0] = Date.now();
+  await stage.sleep(2000);
+  times[1] = Date.now();
+  await context.sleep(2000);
+  times[2] = Date.now();
+  t.true(times[1] >= times[0] + 2000);
+  t.true(times[2] >= times[0] + 4000);
+});

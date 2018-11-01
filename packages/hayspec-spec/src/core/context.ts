@@ -4,6 +4,7 @@ import truthy from '../asserts/truthy';
 import is from '../asserts/is';
 import throws from '../asserts/throws';
 import deepEqual from '../asserts/deep-equal';
+import sleep from '../methods/sleep';
 
 /**
  * 
@@ -201,6 +202,13 @@ export class Context<Data = {}> {
       handler: () => !deepEqual(value, expected),
       message,
     });
+  }
+
+  /**
+   * 
+   */
+  public async sleep(time: number) {
+    return sleep(time);
   }
 
   /**

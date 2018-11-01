@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/reporter",
-  "version": "0.7.4",
+  "version": "0.7.6",
   "description": "Reporter for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -65,7 +65,7 @@
     "typescript": "^3.1.1"
   },
   "dependencies": {
-    "@hayspec/spec": "^0.7.4",
+    "@hayspec/spec": "^0.7.6",
     "chalk": "^2.4.1"
   }
 }
