@@ -33,6 +33,6 @@ test('method `sleep()` continues with timeout', async (t) => {
 
 test('methods `request()` returns supertest instance', async (t) => {
   const stage = new Stage<Data>(reporter);
-  const res = await stage.request('http://google.com').get('/');
-  t.is(res.status, 301);
+  const res = await stage.request({ method: 'get', url: 'http://google.com' });
+  t.is(res.status, 200);
 });

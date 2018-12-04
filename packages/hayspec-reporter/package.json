@@ -6,9 +6,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "clean": "rm -Rf ./dist",
-    "transpile": "npm run clean; tsc",
-    "prepare": "npm run transpile",
-    "test": "nyc ava"
+    "build": "npm run clean; npx tsc",
+    "test": "npx nyc npx ava --verbose"
   },
   "ava": {
     "compileEnhancements": false,

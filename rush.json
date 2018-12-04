@@ -1,0 +1,41 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+  "rushVersion": "5.5.1",
+  "npmVersion": "6.4.1",
+  "nodeSupportedVersionRange": ">=11.0.0",
+  "gitPolicy": {},
+  "repository": {},
+  "eventHooks": {
+    "preRushInstall": [],
+    "postRushInstall": [],
+    "preRushBuild": [],
+    "postRushBuild": []
+  },
+  "projects": [
+    {
+      "packageName": "@hayspec/cli",
+      "projectFolder": "packages/hayspec-cli",
+      "versionPolicyName": "patchAll"
+    },
+    {
+      "packageName": "@hayspec/init",
+      "projectFolder": "packages/hayspec-init",
+      "versionPolicyName": "patchAll"
+    },
+    {
+      "packageName": "@hayspec/reporter",
+      "projectFolder": "packages/hayspec-reporter",
+      "versionPolicyName": "patchAll"
+    },
+    {
+      "packageName": "@hayspec/runner",
+      "projectFolder": "packages/hayspec-runner",
+      "versionPolicyName": "patchAll"
+    },
+    {
+      "packageName": "@hayspec/spec",
+      "projectFolder": "packages/hayspec-spec",
+      "versionPolicyName": "patchAll"
+    }
+  ]
+}
