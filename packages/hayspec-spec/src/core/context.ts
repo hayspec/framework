@@ -1,3 +1,4 @@
+import * as supertest from 'supertest';
 import { Stage } from './stage';
 import { AssertionNote } from './types';
 import truthy from '../asserts/truthy';
@@ -209,6 +210,13 @@ export class Context<Data = {}> {
    */
   public async sleep(time: number) {
     return sleep(time);
+  }
+
+  /**
+   * 
+   */
+  public request(target: any) {
+    return supertest(target);
   }
 
   /**

@@ -393,3 +393,9 @@ test('method `sleep()` continues with timeout', async (t) => {
   t.true(times[1] >= times[0] + 2000);
   t.true(times[2] >= times[0] + 4000);
 });
+
+test('methods `request()` returns supertest instance', async (t) => {
+  const stage = new Stage<Data>(reporter);
+  const res = await stage.request('http://google.com').get('/');
+  t.is(res.status, 301);
+});
