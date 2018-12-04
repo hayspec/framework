@@ -1,14 +1,13 @@
 {
   "name": "@hayspec/runner",
-  "version": "0.7.6",
+  "version": "0.8.0",
   "description": "Tests runner for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "clean": "rm -Rf ./dist",
-    "transpile": "npm run clean; tsc",
-    "prepare": "npm run transpile",
-    "test": "nyc ava"
+    "build": "npm run clean; npx tsc",
+    "test": "npx nyc npx ava --verbose"
   },
   "ava": {
     "compileEnhancements": false,
@@ -58,14 +57,14 @@
   "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^10.11.4",
-    "ava": "^1.0.0-beta.8",
-    "nyc": "^13.0.1",
+    "@types/node": "^10.12.12",
+    "ava": "^1.0.0-rc.2",
+    "nyc": "^13.1.0",
     "ts-node": "^7.0.1",
-    "typescript": "^3.1.1"
+    "typescript": "^3.2.1"
   },
   "dependencies": {
-    "@hayspec/spec": "^0.7.6",
+    "@hayspec/spec": "^0.8.0",
     "fast-glob": "^2.2.3"
   }
 }

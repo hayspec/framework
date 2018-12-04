@@ -1,4 +1,4 @@
-import * as supertest from 'supertest';
+import axios, { AxiosRequestConfig } from 'axios';
 import { Stage } from './stage';
 import { AssertionNote } from './types';
 import truthy from '../asserts/truthy';
@@ -215,8 +215,8 @@ export class Context<Data = {}> {
   /**
    * 
    */
-  public request(target: any) {
-    return supertest(target);
+  public request(config: AxiosRequestConfig) {
+    return axios(config);
   }
 
   /**

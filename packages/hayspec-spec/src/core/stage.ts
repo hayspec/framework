@@ -1,4 +1,4 @@
-import * as supertest from 'supertest';
+import axios, { AxiosRequestConfig } from 'axios';
 import { Reporter } from "./reporter";
 import sleep from '../methods/sleep';
 
@@ -40,8 +40,8 @@ export class Stage<Data = {}> {
   /**
    * 
    */
-  public request(target: any) {
-    return supertest(target);
+  public request(config: AxiosRequestConfig) {
+    return axios(config);
   }
 
 }

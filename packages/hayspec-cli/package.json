@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/cli",
-  "version": "0.7.6",
+  "version": "0.8.0",
   "description": "CLI for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -9,9 +9,8 @@
   },
   "scripts": {
     "clean": "rm -Rf ./dist",
-    "transpile": "npm run clean; tsc",
-    "prepare": "npm run transpile",
-    "test": "npm run transpile && nyc ava --verbose"
+    "build": "npm run clean; npx tsc",
+    "test": "npm run build; npx nyc npx ava --verbose"
   },
   "hayspec": {
     "require": [
@@ -63,20 +62,20 @@
   "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
   "devDependencies": {
-    "@types/inquirer": "0.0.43",
-    "@types/node": "^10.11.4",
+    "@types/inquirer": "^0.0.43",
+    "@types/node": "^10.12.12",
     "@types/yargs": "^12.0.1",
-    "ava": "^1.0.0-beta.8",
-    "nyc": "^13.0.1",
+    "ava": "^1.0.0-rc.2",
+    "nyc": "^13.1.0",
     "ts-node": "^7.0.1",
-    "typescript": "^3.1.1"
+    "typescript": "^3.2.1"
   },
   "dependencies": {
-    "@hayspec/init": "^0.7.6",
-    "@hayspec/reporter": "^0.7.6",
-    "@hayspec/runner": "^0.7.6",
-    "@hayspec/spec": "^0.7.6",
-    "inquirer": "^6.2.0",
-    "yargs": "^12.0.2"
+    "@hayspec/init": "^0.8.0",
+    "@hayspec/reporter": "^0.8.0",
+    "@hayspec/runner": "^0.8.0",
+    "@hayspec/spec": "^0.8.0",
+    "inquirer": "^6.2.1",
+    "yargs": "^12.0.5"
   }
 }
