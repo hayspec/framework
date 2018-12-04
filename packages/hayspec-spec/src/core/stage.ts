@@ -1,3 +1,4 @@
+import * as supertest from 'supertest';
 import { Reporter } from "./reporter";
 import sleep from '../methods/sleep';
 
@@ -34,6 +35,13 @@ export class Stage<Data = {}> {
    */
   public async sleep(time: number) {
     return sleep(time);
+  }
+
+  /**
+   * 
+   */
+  public request(target: any) {
+    return supertest(target);
   }
 
 }

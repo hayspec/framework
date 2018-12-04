@@ -18,3 +18,21 @@ test('methods `set()` and `get()` manages values', async (t) => {
   t.is(id, 100);
   t.is(name, 'foo');
 });
+
+test('method `sleep()` continues with timeout', async (t) => {
+  const times = [0, 0, 0];
+  const stage = new Stage<Data>(reporter);
+  times[0] = Date.now();
+  await stage.sleep(2000);
+  times[1] = Date.now();
+  await stage.sleep(2000);
+  times[2] = Date.now();
+  t.true(times[1] >= times[0] + 2000);
+  t.true(times[2] >= times[0] + 4000);
+});
+
+test('methods `request()` returns supertest instance', async (t) => {
+  const stage = new Stage<Data>(reporter);
+  const res = await stage.request('http://google.com').get('/');
+  t.is(res.status, 301);
+});

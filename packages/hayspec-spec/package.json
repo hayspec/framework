@@ -58,10 +58,14 @@
   "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^10.11.4",
-    "ava": "^1.0.0-beta.8",
-    "nyc": "^13.0.1",
+    "@types/node": "^10.12.12",
+    "ava": "^1.0.0-rc.2",
+    "nyc": "^13.1.0",
     "ts-node": "^7.0.1",
-    "typescript": "^3.1.1"
+    "typescript": "^3.2.1"
+  },
+  "dependencies": {
+    "@types/supertest": "^2.0.7",
+    "supertest": "^3.3.0"
   }
 }
