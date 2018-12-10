@@ -2,6 +2,18 @@
   "name": "@hayspec/cli",
   "entries": [
     {
+      "version": "0.8.2",
+      "tag": "@hayspec/cli_v0.8.2",
+      "date": "Mon, 10 Dec 2018 21:06:44 GMT",
+      "comments": {}
+    },
+    {
+      "version": "0.8.1",
+      "tag": "@hayspec/cli_v0.8.1",
+      "date": "Mon, 10 Dec 2018 20:16:37 GMT",
+      "comments": {}
+    },
+    {
       "version": "0.8.0",
       "tag": "@hayspec/cli_v0.8.0",
       "date": "Tue, 04 Dec 2018 18:16:48 GMT",

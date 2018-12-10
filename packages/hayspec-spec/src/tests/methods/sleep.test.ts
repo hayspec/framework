@@ -1,5 +1,5 @@
 import test from 'ava';
-import sleep from '../../methods/sleep';
+import { sleep } from '../../methods/sleep';
 
 test('continues with timeout', async (t) => {
   const start = Date.now();

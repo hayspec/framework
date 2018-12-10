@@ -397,6 +397,7 @@ test('method `sleep()` continues with timeout', async (t) => {
 test('methods `request()` returns supertest instance', async (t) => {
   const stage = new Stage<Data>(reporter);
   const context = new Context<Data>(stage);
-  const res = await context.request({ method: 'get', url: 'http://google.com' });
+  const res = await context.request({ url: 'https://jsonplaceholder.typicode.com/todos/1' });
   t.is(res.status, 200);
+  t.is(res.data.userId, 1);
 });

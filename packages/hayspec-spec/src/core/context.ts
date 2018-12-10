@@ -1,11 +1,11 @@
-import axios, { AxiosRequestConfig } from 'axios';
 import { Stage } from './stage';
 import { AssertionNote } from './types';
 import truthy from '../asserts/truthy';
 import is from '../asserts/is';
 import throws from '../asserts/throws';
 import deepEqual from '../asserts/deep-equal';
-import sleep from '../methods/sleep';
+import { sleep } from '../methods/sleep';
+import { request, AxiosRequestConfig } from '../methods/request';
 
 /**
  * 
@@ -215,8 +215,8 @@ export class Context<Data = {}> {
   /**
    * 
    */
-  public request(config: AxiosRequestConfig) {
-    return axios(config);
+  public async request(config: AxiosRequestConfig) {
+    return request(config);
   }
 
   /**

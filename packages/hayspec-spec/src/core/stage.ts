@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig } from 'axios';
 import { Reporter } from "./reporter";
-import sleep from '../methods/sleep';
+import { sleep } from '../methods/sleep';
+import { request, AxiosRequestConfig } from '../methods/request';
 
 /**
  * 
@@ -40,8 +40,8 @@ export class Stage<Data = {}> {
   /**
    * 
    */
-  public request(config: AxiosRequestConfig) {
-    return axios(config);
+  public async request(config: AxiosRequestConfig) {
+    return request(config);
   }
 
 }
