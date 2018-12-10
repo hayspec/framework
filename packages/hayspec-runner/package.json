@@ -1,6 +1,6 @@
 {
   "name": "@hayspec/runner",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Tests runner for Hayspec framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -64,7 +64,7 @@
     "typescript": "^3.2.1"
   },
   "dependencies": {
-    "@hayspec/spec": "^0.8.1",
+    "@hayspec/spec": "^0.8.2",
     "fast-glob": "^2.2.3"
   }
 }
