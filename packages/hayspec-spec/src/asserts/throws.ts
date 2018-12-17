@@ -6,7 +6,8 @@ export default function throws (fn: () => any) {
     const res = fn();
     if (res instanceof Promise) {
       return res.then(() => false).catch(() => true);
-    } else {
+    }
+    else {
       return false;
     }
   }

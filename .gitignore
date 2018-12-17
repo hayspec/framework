@@ -55,6 +55,9 @@ jspm_packages/
 # next.js build output
 .next
 
+# Idea configuration.
+.idea
+
 # Common toolchain intermediate files
 temp
 

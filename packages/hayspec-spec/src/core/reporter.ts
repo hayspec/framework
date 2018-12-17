@@ -61,16 +61,20 @@ export class Reporter {
     if (note.type === 'SpecStartNote') {
       this.level++;
       this.onSpecStartNote(note);
-    } else if (note.type === 'SpecEndNote') {
+    }
+    else if (note.type === 'SpecEndNote') {
       this.level--;
       this.onSpecEndNote(note);
-    } else if (note.type === 'TestStartNote') {
+    }
+    else if (note.type === 'TestStartNote') {
       this.level++;
       this.onTestStartNote(note);
-    } else if (note.type === 'TestEndNote') {
+    }
+    else if (note.type === 'TestEndNote') {
       this.level--;
       this.onTestEndNote(note);
-    } else if (note.type === 'AssertionNote') {
+    }
+    else if (note.type === 'AssertionNote') {
       this.onAssertionNote(note);
     }
 
