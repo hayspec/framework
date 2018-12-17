@@ -2,6 +2,12 @@
   "name": "@hayspec/spec",
   "entries": [
     {
+      "version": "0.8.3",
+      "tag": "@hayspec/spec_v0.8.3",
+      "date": "Mon, 17 Dec 2018 18:41:04 GMT",
+      "comments": {}
+    },
+    {
       "version": "0.8.2",
       "tag": "@hayspec/spec_v0.8.2",
       "date": "Mon, 10 Dec 2018 21:06:44 GMT",
