@@ -153,7 +153,8 @@ export class Context<Data = {}> {
         const res = throws(fn);
         if (res instanceof Promise) {
           return res.then((res) => !res);
-        } else {
+        }
+        else {
           return !res;
         }
       },
@@ -243,7 +244,8 @@ export class Context<Data = {}> {
         const result = buildResult(success);
         return printResult(result);
       });
-    } else {
+    }
+    else {
       const result = buildResult(success);
       return printResult(result);
     }

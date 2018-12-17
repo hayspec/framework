@@ -48,7 +48,8 @@ export class Spec<Data = {}> {
   public set stage(s: Stage<Data>) {
     if (this.parent) {
       this.parent.stage = s;
-    } else {
+    }
+    else {
       this._stage = s;
     }
   }
@@ -59,7 +60,8 @@ export class Spec<Data = {}> {
   public get stage() {
     if (this.parent) {
       return this.parent.stage;
-    } else {
+    }
+    else {
       return this._stage;
     }
   }
@@ -84,7 +86,8 @@ export class Spec<Data = {}> {
   public before(handler: StageHandler<Data>, append: boolean = true) {
     if (append) {
       this.beforeHandlers.push(handler);
-    } else {
+    }
+    else {
       this.beforeHandlers.unshift(handler);
     }
     return this;
@@ -96,7 +99,8 @@ export class Spec<Data = {}> {
   public beforeEach(handler: ContextHandler<Data>, append: boolean = true) {
     if (append) {
       this.beforeEachHandlers.push(handler);
-    } else {
+    }
+    else {
       this.beforeEachHandlers.unshift(handler);
     }
     return this;
@@ -108,7 +112,8 @@ export class Spec<Data = {}> {
   public after(handler: StageHandler<Data>, append: boolean = true) {
     if (append) {
       this.afterHandlers.push(handler);
-    } else {
+    }
+    else {
       this.afterHandlers.unshift(handler);
     }
     return this;
@@ -120,7 +125,8 @@ export class Spec<Data = {}> {
   public afterEach(handler: ContextHandler<Data>, append: boolean = true) {
     if (append) {
       this.afterEachHandlers.push(handler);
-    } else {
+    }
+    else {
       this.afterEachHandlers.unshift(handler);
     }
     return this;
@@ -183,7 +189,8 @@ export class Spec<Data = {}> {
     for (const recipe of this.performRecipes) {
       if (recipe.spec) {
         await this.performSpec(recipe);
-      } else {
+      }
+      else {
         await this.performTest(recipe);
       }
     }
