@@ -67,6 +67,13 @@ export class Spec<Data = {}> {
   /**
    * 
    */
+  public hasOnly() {
+     return this.onlyEnabled;
+  }
+
+  /**
+   * 
+   */
   public isRoot() {
     return !this.parent;
   }

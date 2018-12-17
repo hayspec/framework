@@ -23,6 +23,7 @@ export interface RunnerOptions {
  */
 export class Runner {
   protected options: RunnerOptions;
+  protected onlyEnabled: boolean = false;
   public results: RunnerResult[] = [];
 
   /**
@@ -48,7 +49,23 @@ export class Runner {
     const files = await glob(patterns, options) as string[];
 
     files.forEach((file) => {
-      this.loadSpec(file);
+      const spec = this.loadSpec(file);
+
+      if (!spec) {
+        return;
+      }
+      else if (spec.spec.hasOnly() && !this.onlyEnabled) {
+        this.onlyEnabled = true;
+        this.results = [];
+      }
+
+      if (this.onlyEnabled && spec.spec.hasOnly()) {
+        this.results.push(spec);
+      }
+      else if (!this.onlyEnabled) {
+        this.results.push(spec);
+      }
+
     });
   }
 
@@ -69,9 +86,12 @@ export class Runner {
     const spec = require(file);
 
     if (spec instanceof Spec) {
-      this.results.push({ file, spec });
+      return { file, spec };
     } else if (spec.default  instanceof Spec) {
-      this.results.push({ file, spec: spec.default });
+      return { file, spec: spec.default };
+    }
+    else {
+      return null;
     }
   }
 
