@@ -64,9 +64,12 @@ export class Spec<Data = {}> {
     }
   }
 
-  // public hasOnly() {
-  //   return this.onlyEnabled;
-  // }
+  /**
+   * 
+   */
+  public hasOnly() {
+     return this.onlyEnabled;
+  }
 
   /**
    * 
