@@ -14,7 +14,7 @@ export interface RunnerResult {
  */
 export interface RunnerOptions {
   cwd?: string;
-  deep?: boolean;
+  deep?: number;
   dot?: boolean;
 }
 
@@ -32,7 +32,7 @@ export class Runner {
   public constructor(options?: RunnerOptions) {
     this.options = {
       cwd: process.cwd(),
-      deep: true,
+      deep: Infinity,
       dot: false,
       ...options,
     };

@@ -63,12 +63,12 @@
   "license": "MIT",
   "devDependencies": {
     "@types/inquirer": "^0.0.43",
-    "@types/node": "^10.12.12",
+    "@types/node": "^12.6.2",
     "@types/yargs": "^12.0.1",
-    "ava": "^1.0.0-rc.2",
-    "nyc": "^13.1.0",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.1"
+    "ava": "^2.2.0",
+    "nyc": "^14.1.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.0"
   },
   "dependencies": {
     "@hayspec/init": "^0.8.3",
