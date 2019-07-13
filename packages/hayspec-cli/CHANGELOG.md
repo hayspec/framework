@@ -1,6 +1,11 @@
 # Change Log - @hayspec/cli
 
-This log was last generated on Mon, 17 Dec 2018 18:41:04 GMT and should not be manually modified.
+This log was last generated on Sat, 13 Jul 2019 01:23:01 GMT and should not be manually modified.
+
+## 0.8.4
+Sat, 13 Jul 2019 01:23:01 GMT
+
+*Version update only*
 
 ## 0.8.3
 Mon, 17 Dec 2018 18:41:04 GMT
