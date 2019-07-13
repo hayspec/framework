@@ -2,6 +2,12 @@
   "name": "@hayspec/init",
   "entries": [
     {
+      "version": "0.8.4",
+      "tag": "@hayspec/init_v0.8.4",
+      "date": "Sat, 13 Jul 2019 01:23:01 GMT",
+      "comments": {}
+    },
+    {
       "version": "0.8.3",
       "tag": "@hayspec/init_v0.8.3",
       "date": "Mon, 17 Dec 2018 18:41:04 GMT",

@@ -2,7 +2,7 @@
   {
     "policyName": "patchAll",
     "definitionName": "lockStepVersion",
-    "version": "0.8.3",
+    "version": "0.8.4",
     "nextBump": "patch"
   }
 ]
