@@ -36,3 +36,10 @@ test('methods `request()` returns supertest instance', async (t) => {
   const res = await stage.request({ method: 'get', url: 'http://google.com' });
   t.is(res.status, 200);
 });
+
+test('methods `exec()` returns terminal command result', async (t) => {
+  const stage = new Stage<Data>(reporter);
+  const { stdout, stderr } = await stage.exec('echo "foo"');
+  t.true(stdout.indexOf('foo') !== -1);
+  t.true(stderr === '');
+});

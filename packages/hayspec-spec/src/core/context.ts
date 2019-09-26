@@ -4,6 +4,7 @@ import truthy from '../asserts/truthy';
 import is from '../asserts/is';
 import throws from '../asserts/throws';
 import deepEqual from '../asserts/deep-equal';
+import { exec } from '../methods/exec';
 import { sleep } from '../methods/sleep';
 import { request, AxiosRequestConfig } from '../methods/request';
 
@@ -218,6 +219,13 @@ export class Context<Data = {}> {
    */
   public async request(config: AxiosRequestConfig) {
     return request(config);
+  }
+
+  /**
+   * 
+   */
+  public async exec(command: string) {
+    return exec(command);
   }
 
   /**
