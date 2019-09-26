@@ -1,4 +1,5 @@
 import { Reporter } from "./reporter";
+import { exec } from '../methods/exec';
 import { sleep } from '../methods/sleep';
 import { request, AxiosRequestConfig } from '../methods/request';
 
@@ -42,6 +43,13 @@ export class Stage<Data = {}> {
    */
   public async request(config: AxiosRequestConfig) {
     return request(config);
+  }
+
+  /**
+   * 
+   */
+  public async exec(command: string) {
+    return exec(command);
   }
 
 }

@@ -1,6 +1,11 @@
 # Change Log - @hayspec/reporter
 
-This log was last generated on Sat, 13 Jul 2019 01:23:01 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Sep 2019 17:35:19 GMT and should not be manually modified.
+
+## 0.9.0
+Thu, 26 Sep 2019 17:35:19 GMT
+
+*Version update only*
 
 ## 0.8.4
 Sat, 13 Jul 2019 01:23:01 GMT

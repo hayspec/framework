@@ -401,3 +401,11 @@ test('methods `request()` returns supertest instance', async (t) => {
   t.is(res.status, 200);
   t.is(res.data.userId, 1);
 });
+
+test('methods `exec()` returns terminal command result', async (t) => {
+  const stage = new Stage<Data>(reporter);
+  const context = new Context<Data>(stage);
+  const { stdout, stderr } = await context.exec('echo "foo"');
+  t.true(stdout.indexOf('foo') !== -1);
+  t.true(stderr === '');
+});
