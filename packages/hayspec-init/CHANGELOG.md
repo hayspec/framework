@@ -1,6 +1,16 @@
 # Change Log - @hayspec/init
 
-This log was last generated on Mon, 04 May 2020 09:30:44 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Apr 2021 09:51:28 GMT and should not be manually modified.
+
+## 0.10.2
+Wed, 07 Apr 2021 09:51:28 GMT
+
+*Version update only*
+
+## 0.10.1
+Wed, 07 Apr 2021 09:51:23 GMT
+
+*Version update only*
 
 ## 0.10.0
 Mon, 04 May 2020 09:30:44 GMT

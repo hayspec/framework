@@ -43,8 +43,8 @@ The release manager will publish packages to NPM using these commands.
 
 ```
 $ rush version --bump --override-bump minor
-$ rush update --full
+$ rm -Rf common/temp && rush update --full
 $ rush rebuild
-$ rush test
+$ rush test -v
 $ rush publish --publish --include-all
 ```

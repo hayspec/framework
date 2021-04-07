@@ -2,6 +2,18 @@
   "name": "@hayspec/cli",
   "entries": [
     {
+      "version": "0.10.2",
+      "tag": "@hayspec/cli_v0.10.2",
+      "date": "Wed, 07 Apr 2021 09:51:28 GMT",
+      "comments": {}
+    },
+    {
+      "version": "0.10.1",
+      "tag": "@hayspec/cli_v0.10.1",
+      "date": "Wed, 07 Apr 2021 09:51:23 GMT",
+      "comments": {}
+    },
+    {
       "version": "0.10.0",
       "tag": "@hayspec/cli_v0.10.0",
       "date": "Mon, 04 May 2020 09:30:44 GMT",
