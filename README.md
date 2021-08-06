@@ -140,7 +140,7 @@ The `@hayspec/cli` module is automatically installed when you initialize the pro
 
 To get a list of available features use the `--help` flag.
 
-```
+```bash
 $ npx hayspec --help
 ```
 
@@ -154,7 +154,7 @@ export default spec;
 
 Run the `hayspec test` command to run tests. Customize the files search by using the `--match` flag.
 
-```
+```bash
 $ npx hayspec test --match ./**/*.test.*
 ```
 
@@ -162,7 +162,7 @@ $ npx hayspec test --match ./**/*.test.*
 
 Install the [ts-node](https://www.npmjs.com/package/ts-node) NPM package then use the `--require` flag to enable [TypeScript](https://www.typescriptlang.org/) support.
 
-```
+```bash
 hayspec --require ts-node/register
 ```
 
@@ -170,7 +170,7 @@ hayspec --require ts-node/register
 
 Hayspec configuration options can be saved inside the `package.json` file under the the `hayspec` key.
 
-```
+```json
 {
   "hayspec": {
     "require": [
